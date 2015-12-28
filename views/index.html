@@ -19,16 +19,23 @@
         <%- include viewport/footer.html %>
     </div>
     <script type="text/javascript">
-        require(["knockout", "jquery", "app", "ko-amd"], function (ko, $, App) {
+        var params = <%= params %>;
+        console.log(params);
+    </script>
+    <script type="text/javascript">
+        require(["knockout", "jquery", "Tools", "app", "ko-amd"], function (ko, $, Tools, App) {
             ko.bindingHandlers.module.baseDir = "apps/<%= appName %>/modules";
             ko.amdTemplateEngine.defaultPath = "apps/<%= appName %>/templates";
 
-            $.getJSON("apps/<%= appName %>/rev-manifest.json?v=");
+            $.getJSON("apps/<%= appName %>/rev-manifest.json?v=" + Tools.guid("xxxxxxxxxxxx"), function (mapping) {
+                params.mapping = mapping;
+                params.mapping.get = function (key) {
+                    var result = this[key + '.min.js'];
+                    return result.substring(0, result.length - 3);
+                };
 
-            ko.applyBindings(new App({
-                parent  : this,
-                data    : {}
-            }));
+                ko.applyBindings(new App({ parent: this, data: params }));
+            });
         });
     </script>
 </body>

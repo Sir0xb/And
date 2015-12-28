@@ -14,7 +14,9 @@ module.exports = function (app) {
         res.render("index.html", {
             title   : "首页",
             appName : "welcome",
-            params  : {}
+            params  : {
+                test: true
+            }
         });
     });
 
