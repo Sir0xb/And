@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include viewport/meta.html %>
+    <title><%= title %></title>
+    <%- include viewport/links.html %>
+    <%- include viewport/scripts.html %>
+</head>
+<body>
+    <div class="mycontainer">
+        <%- include viewport/menu.html %>
+        <div class="ui main container mycontent">
+            <div data-bind="module: palette, visible: !loading()"></div>
+            <div id="loading" data-bind="visible: loading()">
+                <div class='rabbit'></div>
+                <div class='clouds'></div>
+            </div>
+        </div>
+        <%- include viewport/footer.html %>
+    </div>
+    <script type="text/javascript">
+        require(["knockout", "jquery", "app", "ko-amd"], function (ko, $, App) {
+            ko.bindingHandlers.module.baseDir = "apps/<%= appName %>/modules";
+            ko.amdTemplateEngine.defaultPath = "apps/<%= appName %>/templates";
+
+            $.getJSON("apps/<%= appName %>/rev-manifest.json?v=");
+
+            ko.applyBindings(new App({
+                parent  : this,
+                data    : {}
+            }));
+        });
+    </script>
+</body>
+</html>

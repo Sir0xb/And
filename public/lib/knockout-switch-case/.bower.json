@@ -1,0 +1,15 @@
+{
+  "name": "knockout-switch-case",
+  "homepage": "https://github.com/mbest/knockout-switch-case",
+  "version": "2.1.0",
+  "_release": "2.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.1.0",
+    "commit": "987fddcaf8788ea7f78ab1b526a80d5391769086"
+  },
+  "_source": "git://github.com/mbest/knockout-switch-case.git",
+  "_target": "~2.1.0",
+  "_originalSource": "knockout-switch-case",
+  "_direct": true
+}

@@ -1,0 +1,118 @@
+<style>
+    .red { background-color: red; color: yellow; }
+</style>
+<form class="form-horizontal" style="width: 800px;">
+    <div class="form-group">
+        <h4 class="col-md-3 col-md-offset-2">
+            <a target="_blank" href="http://cdn-cc.17zuoye.cn/static/17cdn/ko-path/koTextcutHandler.js">koTextcutHandler</a>
+        </h4>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">原数据</label>
+        <div class="col-sm-10">
+            <div data-bind="text: text1"></div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">处理后</label>
+        <div class="col-sm-10">
+            <div data-bind="textcut: { text: text1, length: 9 }"></div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="form-group">
+        <h4 class="col-md-3 col-md-offset-2">
+            <a target="_blank" href="http://cdn-cc.17zuoye.cn/static/17cdn/ko-path/koHoverHandler.js">koHoverHandler</a>
+        </h4>
+    </div>
+    <div class="form-group">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-bind="hover: 'red'">
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr data-bind="hover: 'red'">
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr data-bind="hover: 'red'">
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <br>
+
+    <div class="form-group">
+        <h4 class="col-md-3 col-md-offset-2">
+            <a target="_blank" href="/ko-path/beforeSubscribe.js">beforeSubscribe</a>
+        </h4>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">加载前</label>
+        <div class="col-sm-10">
+            <div class="col-sm-10">
+                <input type="text" class="form-control" data-bind="value: text2, valueUpdate: 'afterkeydown'">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">加载后</label>
+        <div class="col-sm-10">
+            <div class="col-sm-10">
+                <input type="text" class="form-control" data-bind="value: text3, valueUpdate: 'afterkeydown'">
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="form-group">
+        <h4 class="col-md-3 col-md-offset-2">
+            <a target="_blank" href="/ko-path/onecBeforeSubscribe.js">onecBeforeSubscribe</a>
+        </h4>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">多次绑定的数据</label>
+        <div class="col-sm-10">
+            <div class="col-sm-10">
+                <input type="text" class="form-control" data-bind="value: text4, valueUpdate: 'afterkeydown'">
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="form-group">
+        <h4 class="col-md-3 col-md-offset-2">
+            <a target="_blank" href="/ko-path/onecBeforeSubscribe.js">onecSubscribe</a>
+        </h4>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">多次绑定的数据</label>
+        <div class="col-sm-10">
+            <div class="col-sm-10">
+                <input type="text" class="form-control" data-bind="value: text5, valueUpdate: 'afterkeydown'">
+            </div>
+        </div>
+    </div>
+</form>
