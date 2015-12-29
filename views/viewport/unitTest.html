@@ -1,6 +1,19 @@
+<% if(showTest || false){ %>
+<link rel="stylesheet" type="text/css" href="lib/jasmine/jasmine-core/jasmine.css">
+<script type="text/javascript" src="lib/jasmine/jasmine-core/jasmine.js"></script>
+<script type="text/javascript" src="lib/jasmine/jasmine-core/jasmine-html.js"></script>
+<script type="text/javascript" src="lib/jquery-1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="lib/jasmine/jasmine-core/boot/boot.js"></script>
+<script type="text/javascript" src="apps/<%= appName %>/test.js"></script>
+<% } %>
 <script type="text/javascript">
     var params = {
         test: true
     };
     console.log(params);
 </script>
+<% if(showTest || false){ %>
+<script type="text/javascript">
+    runUnit(params);
+</script>
+<% } %>

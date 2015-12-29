@@ -11,13 +11,22 @@ module.exports = function (app) {
     // Customs(app);
 
     app.get("/", function (req, res) {
-        res.render("index.html", {
-            title   : "首页",
-            appName : "welcome",
-            params  : {
-                test: true
-            }
-        });
+        if (req.query.unitTest) {
+            res.render("viewport/unitTest.html", {
+                title   : "接口测试",
+                appName : "welcome",
+                showTest: true
+            });
+        } else {
+            res.render("index.html", {
+                title   : "首页",
+                appName : "welcome",
+                showTest: false,
+                params  : {
+                    test: true
+                }
+            });
+        }
     });
 
     // 用户相关信息托管
