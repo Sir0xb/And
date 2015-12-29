@@ -1,16 +1,14 @@
 var Customs = require("./Customs");
-
-require("../config/mongodb");
-
-var crooms = require("./crooms.js");
-var users = require("./users.js");
-var menus = require("./menus.js");
+var Menus = require("./Menus.js");
 
 module.exports = function (app) {
-    // 检查权限
-    // Customs(app);
+    var MenuDao = require("../models/menuDao");
 
     app.get("/", function (req, res) {
+        MenuDao.findByName({}, function (err) {
+            console.log(err);
+        });
+
         if (req.query.unitTest) {
             res.render("viewport/unitTest.html", {
                 title   : "接口测试",
@@ -29,12 +27,5 @@ module.exports = function (app) {
         }
     });
 
-    // 用户相关信息托管
-    // users(app);
-    //
-    // // 托管菜单
-    // menus(app);
-    //
-    // // 会议室接口托管
-    // crooms(app);
+    Menus(app);
 };

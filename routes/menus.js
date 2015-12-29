@@ -1,8 +1,7 @@
-var mongoose = require("mongoose");
-
 module.exports = function(app) {
+
     app.post("/menus/load", function(req, res, next) {
-        var Menu = mongoose.model("Menu");
+        // var Menu = mongoose.model("Menu");
 
         // var menu = new Menu({
         //     menuId      : 'menus',
@@ -60,16 +59,16 @@ module.exports = function(app) {
         //     console.log('save status:',err ? 'failed' : 'success');
         // });
 
-        Menu.find({}, function (err, results) {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            console.log(results);
-            res.contentType('json');
-            res.send(JSON.stringify(results));
-            res.end();
-        });
+        // Menu.find({}, function (err, results) {
+        //     if (err) {
+        //         console.log(err);
+        //         return;
+        //     }
+        //     console.log(results);
+        //     res.contentType('json');
+        //     res.send(JSON.stringify(results));
+        //     res.end();
+        // });
 
 
 

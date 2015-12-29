@@ -25,7 +25,7 @@
 
   Q = require("q");
 
-  apps = ["test", "welcome"];
+  apps = ["login", "signup", "test", "welcome"];
 
   gulp.task("clean", function() {
     var appName, i, len, results;

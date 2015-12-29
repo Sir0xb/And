@@ -16,6 +16,8 @@ rev     = require "gulp-rev"
 Q       = require "q"
 
 apps = [
+    "login"
+    "signup"
     "test"
     "welcome"
 ]
