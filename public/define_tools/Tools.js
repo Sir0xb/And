@@ -140,17 +140,25 @@ define([], function () {
         $.ajax(confObj);
     }
 
+    function getMappingFunc(matchStr, cutLength) {
+        return function (key) {
+            var result = this[key + matchStr];
+            return result.substring(0, result.length - cutLength);
+        };
+    }
+
     return {
-        version     : version,
-        include     : include,
-        extend      : extend,
-        namespace   : namespace,
-        guid        : guid,
-        backToTop   : backToTop,
-        replaceAll  : replaceAll,
-        loadingStart: loadingStart,
-        loadingEnd  : loadingEnd,
-        msgTip      : msgTip,
-        ajax        : ajax
+        version         : version,
+        include         : include,
+        extend          : extend,
+        namespace       : namespace,
+        guid            : guid,
+        backToTop       : backToTop,
+        replaceAll      : replaceAll,
+        loadingStart    : loadingStart,
+        loadingEnd      : loadingEnd,
+        msgTip          : msgTip,
+        ajax            : ajax,
+        getMappingFunc  : getMappingFunc
     };
 });

@@ -18,23 +18,30 @@
         </div>
         <%- include viewport/footer.html %>
     </div>
+    <%- include viewport/unitTest.html %>
     <script type="text/javascript">
-        var params = <%= params %>;
-        console.log(params);
-    </script>
-    <script type="text/javascript">
-        require(["knockout", "jquery", "Tools", "app", "ko-amd"], function (ko, $, Tools, App) {
+        require(["knockout", "jquery", "Tools", "Super", "ko-amd"], function (ko, $, Tools, Super) {
             ko.bindingHandlers.module.baseDir = "apps/<%= appName %>/modules";
             ko.amdTemplateEngine.defaultPath = "apps/<%= appName %>/templates";
 
             $.getJSON("apps/<%= appName %>/rev-manifest.json?v=" + Tools.guid("xxxxxxxxxxxx"), function (mapping) {
-                params.mapping = mapping;
-                params.mapping.get = function (key) {
-                    var result = this[key + '.min.js'];
-                    return result.substring(0, result.length - 3);
-                };
+                params.mapping          = mapping;
+                params.mapping.getJS    = Tools.getMappingFunc('.min.js', 3);
+                params.mapping.getTemp  = Tools.getMappingFunc('.tmpl.html', 10);
 
-                ko.applyBindings(new App({ parent: this, data: params }));
+                var self = Super.call({}, { parent: null, data: params });
+
+                self.palette({
+                    name    : self.data.mapping.getJS("main"),
+                    template: self.data.mapping.getTemp("main"),
+                    data    : { parent: self, data: self.data }
+                });
+
+                ko.applyBindings(self);
+
+                if (self.data.test) {
+                    index = self;
+                }
             });
         });
     </script>

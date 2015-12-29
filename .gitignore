@@ -1,5 +1,6 @@
 node_modules
 
 *.min.js
+*.tmpl.html
 
 rev-manifest.json
