@@ -26,10 +26,12 @@ app.use(parser.urlencoded({
     extended: true
 }));
 app.use(session({
-    secret  : Config.cookie.secret,
-    key     : Config.mongoInfo.db,
-    cookie  : { maxAge: 1000 * 60 * 60 * 24 * 30 },
-    store   : new MongoStore({
+    secret              : Config.cookie.secret,
+    resave              : false,
+    saveUninitialized   : true,
+    key                 : Config.mongoInfo.db,
+    cookie              : { maxAge: 1000 * 60 * 60 * 24 * 30 },
+    store               : new MongoStore({
         db  : Config.mongoInfo.db
     })
 }));
