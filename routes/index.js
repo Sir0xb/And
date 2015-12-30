@@ -8,7 +8,7 @@ module.exports = function (app) {
     app.get("/", function (req, res) {
         if(!req.session.user){
             req.flash("error", "请先登录");
-            return res.redirect("/login");
+            res.redirect("/login");
         }
 
         MenuDao.findByName({}, function (err) {

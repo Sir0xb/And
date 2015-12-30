@@ -8,7 +8,7 @@ module.exports = function(app) {
     });
 
     app.post("/login", function (req, res, next) {
-        req.flash("error", "用户信息错误");
+        req.flash("error", "无权访问");
         return res.redirect("/login");
     });
 };

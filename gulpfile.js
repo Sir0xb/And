@@ -1,5 +1,5 @@
 (function() {
-  var Q, apps, clean, concat, gulp, htmlmin, jshint, path, plumber, rename, rev, runSequence, uglify;
+  var apps, clean, concat, gulp, htmlmin, jshint, path, plumber, rename, rev, runSequence, uglify;
 
   path = require("path");
 
@@ -22,8 +22,6 @@
   clean = require("gulp-clean");
 
   rev = require("gulp-rev");
-
-  Q = require("q");
 
   apps = ["login", "signup", "test", "welcome"];
 

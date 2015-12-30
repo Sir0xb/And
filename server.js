@@ -1,10 +1,12 @@
 var express = require("express");
 
-var ejs = require("ejs");
-var flash = require("connect-flash");
 var cookie = require("cookie-parser");
 var parser = require("body-parser");
 var session = require("express-session");
+
+var MongoStore = require("connect-mongo")(session);
+var flash = require("connect-flash");
+var ejs = require("ejs");
 
 var Config = require("./config/config");
 var routes = require("./routes");
@@ -16,8 +18,8 @@ app.set("view engine", "html");
 app.set("port", process.env.PORT || 5678);
 app.set("views", __dirname + "/views");
 app.use(express.static(__dirname + "/public"));
-
 app.use(flash());
+
 app.use(cookie());
 app.use(parser.json());
 app.use(parser.urlencoded({
@@ -25,12 +27,11 @@ app.use(parser.urlencoded({
 }));
 app.use(session({
     secret  : Config.cookie.secret,
-    resave  : false,
-    saveUninitialized: true,
-    cookie  : {
-        secure: true,
-        maxAge: 1000 * 60 * 60 * 24 * 30
-    }
+    key     : Config.mongoInfo.db,
+    cookie  : { maxAge: 1000 * 60 * 60 * 24 * 30 },
+    store   : new MongoStore({
+        db  : Config.mongoInfo.db
+    })
 }));
 
 app.listen(app.get("port"), function () {

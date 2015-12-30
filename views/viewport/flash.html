@@ -1,21 +1,21 @@
-<% if(success){ %>
+<% if(message.success){ %>
 <div class="ui info message mymessage">
     <i class="close icon"></i>
-    <div class="header"><%= success %></div>
+    <div class="header"><%= message.success %></div>
     <!-- Visit our registration page, then try again -->
 </div>
 <% } %>
-<% if(warning){ %>
+<% if(message.warning){ %>
 <div class="ui warning message mymessage">
     <i class="close icon"></i>
-    <div class="header"><%= warning %></div>
+    <div class="header"><%= message.warning %></div>
     <!-- Visit our registration page, then try again -->
 </div>
 <% } %>
-<% if(error){ %>
+<% if(message.error){ %>
 <div class="ui warning message mymessage">
     <i class="close icon"></i>
-    <div class="header"><%= error %></div>123
+    <div class="header"><%= message.error %></div>
     <!-- Visit our registration page, then try again -->
 </div>
 <% } %>

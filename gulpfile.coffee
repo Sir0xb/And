@@ -13,7 +13,6 @@ concat  = require "gulp-concat"
 rename  = require "gulp-rename"
 clean   = require "gulp-clean"
 rev     = require "gulp-rev"
-Q       = require "q"
 
 apps = [
     "login"
