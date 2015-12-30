@@ -2,6 +2,29 @@ body {
     background-color: #FFFFFF;
     height: 100%;
 }
+.mycontainer{
+    min-height: 100%;
+    position: relative;
+}
+.mymenu{
+    position: relative!important;
+    margin-bottom: 10px!important;
+}
+.mymessage{
+    margin-left: 160px!important;
+    margin-right: 160px!important;
+    margin-bottom: 10px!important;
+}
+.mycontent{
+    padding-bottom: 145px!important;
+    overflow: hidden;
+}
+.myfooter{
+    position: absolute!important;
+    height: 135px;
+    width: 100%;
+    bottom: 0;
+}
 
 .ui.menu .item img.logo {
     margin-right: 1.5em;
@@ -12,21 +35,6 @@ body {
 
 .navbar-inverse { border-radius: 0 }
 
-/* footer样式 */
-.mycontainer{
-    min-height: 100%;
-    position: relative;
-}
-.mycontent{
-    padding-top: 70px;
-    padding-bottom: 280px;
-}
-.myfooter{
-    position: absolute!important;
-    height: 270px;
-    width: 100%;
-    bottom: 0;
-}
 
 #loading {
     position:absolute;

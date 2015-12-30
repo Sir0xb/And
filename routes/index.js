@@ -1,10 +1,16 @@
 var Customs = require("./Customs");
 var Menus = require("./Menus.js");
+var Login = require("./Login.js");
 
 module.exports = function (app) {
     var MenuDao = require("../models/menuDao");
 
     app.get("/", function (req, res) {
+        if(!req.session.user){
+            req.flash("error", "请先登录");
+            return res.redirect("/login");
+        }
+
         MenuDao.findByName({}, function (err) {
             console.log(err);
         });
@@ -17,6 +23,9 @@ module.exports = function (app) {
             });
         } else {
             res.render("index.html", {
+                success : req.flash("success").toString(),
+                warning : req.flash("warning").toString(),
+                error   : req.flash("error").toString(),
                 title   : "首页",
                 appName : "welcome",
                 showTest: false,
@@ -28,4 +37,6 @@ module.exports = function (app) {
     });
 
     Menus(app);
+
+    Login(app);
 };

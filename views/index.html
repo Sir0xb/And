@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- 网站 Meta 信息 -->
     <%- include viewport/meta.html %>
+    <!-- /网站 Meta 信息 -->
     <title><%= title %></title>
+    <!-- 通用样式 -->
     <%- include viewport/links.html %>
+    <!-- /通用样式 -->
+    <!-- 通用脚本 -->
     <%- include viewport/scripts.html %>
+    <!-- /通用脚本 -->
 </head>
 <body>
     <div class="mycontainer">
+        <!-- 菜单信息 -->
         <%- include viewport/menu.html %>
+        <!-- /菜单信息 -->
+        <!-- 提示信息框 -->
+        <%- include viewport/flash.html %>
+        <!-- /提示信息框 -->
         <div class="ui main container mycontent">
             <div data-bind="module: palette, visible: !loading()"></div>
             <div id="loading" data-bind="visible: loading()">
@@ -16,14 +27,20 @@
                 <div class='clouds'></div>
             </div>
         </div>
+        <!-- 页尾信息 -->
         <%- include viewport/footer.html %>
+        <!-- /页尾信息 -->
     </div>
+    <!-- 数据接口 ?unitTest=true 进行接口测试 -->
     <%- include viewport/unitTest.html %>
+    <!-- /数据接口 -->
     <script type="text/javascript">
         require(["knockout", "jquery", "Tools", "Super", "ko-amd"], function (ko, $, Tools, Super) {
+            // 脚本、模板路径配置
             ko.bindingHandlers.module.baseDir = "apps/<%= appName %>/modules";
             ko.amdTemplateEngine.defaultPath = "apps/<%= appName %>/templates";
 
+            // 请求压缩文件映射表
             $.getJSON("apps/<%= appName %>/rev-manifest.json?v=" + Tools.guid("xxxxxxxxxxxx"), function (mapping) {
                 params.mapping          = mapping;
                 params.mapping.getJS    = Tools.getMappingFunc('.min.js', 3);

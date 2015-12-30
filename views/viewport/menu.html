@@ -1,9 +1,10 @@
-<div class="ui fixed inverted menu">
+<div class="ui fixed inverted menu mymenu">
     <div class="ui container">
         <a href="/" class="header item">
             <img class="logo" src="images/logo.png" style="width: 40px;">
             AND
         </a>
+        <% if(user) {%>
         <div class="ui simple dropdown item">
             Dropdown <i class="dropdown icon"></i>
             <div class="menu">
@@ -22,5 +23,6 @@
                 <a class="item" href="#">Link Item</a>
             </div>
         </div>
+        <% } %>
     </div>
 </div>
