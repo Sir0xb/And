@@ -3,6 +3,7 @@
 path = require "path"
 gulp = require "gulp"
 
+browserSync = require("browser-sync").create()
 runSequence = require "run-sequence"
 
 plumber = require "gulp-plumber"
@@ -81,8 +82,14 @@ gulp.task "html", ["clean:html"], ->
         merge   : yes
     .pipe gulp.dest "public/apps/#{appName}/" for appName in apps
 
+gulp.task "browser-sync", ->
+    browserSync.init
+        proxy   : "http://localhost:5678"
+        files   : ["public/**/*.*"]
+        port    : 5000
+
 gulp.task "default", ->
-    runSequence "clean", "js", "html"
+    runSequence "clean", "js", "html", "browser-sync"
 
     gulp.watch [
         "public/apps/#{appName}/modules/**/*.js"
@@ -91,4 +98,5 @@ gulp.task "default", ->
         "!public/apps/#{appName}/templates/**/*.tmpl.html"
     ], (->
         runSequence "clean", "js", "html"
-    ) for appName in apps
+    )
+    .on "change", browserSync.reload for appName in apps

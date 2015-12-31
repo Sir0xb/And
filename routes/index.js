@@ -1,8 +1,7 @@
 var Tools = require("./resTools");
 
-var Customs = require("./Customs");
-var Menus = require("./Menus.js");
-var Login = require("./Login.js");
+var Login = require("./Login");
+var Signup = require("./Signup");
 
 module.exports = function (app) {
     var MenuDao = require("../models/menuDao");
@@ -21,7 +20,7 @@ module.exports = function (app) {
         });
     });
 
-    Menus(app);
-
     Login(app);
+    
+    Signup(app);
 };

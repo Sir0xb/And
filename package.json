@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Sir0xb/And#readme",
   "devDependencies": {
+    "browser-sync": "^2.10.1",
     "gulp": "^3.9.0",
     "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.6.0",

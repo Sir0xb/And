@@ -1,9 +1,11 @@
 (function() {
-  var apps, clean, concat, gulp, htmlmin, jshint, path, plumber, rename, rev, runSequence, uglify;
+  var apps, browserSync, clean, concat, gulp, htmlmin, jshint, path, plumber, rename, rev, runSequence, uglify;
 
   path = require("path");
 
   gulp = require("gulp");
+
+  browserSync = require("browser-sync").create();
 
   runSequence = require("run-sequence");
 
@@ -108,15 +110,23 @@
     return results;
   });
 
+  gulp.task("browser-sync", function() {
+    return browserSync.init({
+      proxy: "http://localhost:5678",
+      files: ["public/**/*.*"],
+      port: 5000
+    });
+  });
+
   gulp.task("default", function() {
     var appName, i, len, results;
-    runSequence("clean", "js", "html");
+    runSequence("clean", "js", "html", "browser-sync");
     results = [];
     for (i = 0, len = apps.length; i < len; i++) {
       appName = apps[i];
       results.push(gulp.watch(["public/apps/" + appName + "/modules/**/*.js", "!public/apps/" + appName + "/modules/**/*.min.js", "public/apps/" + appName + "/templates/**/*.html", "!public/apps/" + appName + "/templates/**/*.tmpl.html"], (function() {
         return runSequence("clean", "js", "html");
-      })));
+      })).on("change", browserSync.reload));
     }
     return results;
   });
