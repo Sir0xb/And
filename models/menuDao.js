@@ -30,4 +30,10 @@ MenuDao.prototype.findById = function (menuId, callback) {
     });
 };
 
+MenuDao.prototype.findAll = function (callback) {
+    Menu.find({}, function (err, obj) {
+        callback(err, obj);
+    });
+}
+
 module.exports = new MenuDao();

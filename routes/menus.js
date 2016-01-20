@@ -5,10 +5,27 @@ module.exports = function(app) {
 
     app.get("/menus", function (req, res, next) {
         Tools.log('Menus', 'get', 'menus', '请求访问菜单管理', 'menus');
-        Tools.pageJump(req, res, next, "index.html", "菜单管理", "menus");
+
+        MenuDao.findAll(function (err, obj) {
+            Tools.pageJump(req, res, next, "index.html", "菜单管理", "menus", {
+                menus: obj
+            });
+        });
     });
 
     app.post("/menus/load", function(req, res, next) {
+
+        // MenuDao.save({
+        //     menuId      : 'root',
+        //     menuName    : 'root',
+        //     level       : '0',
+        //     link        : '/',
+        //     desc        : '根目录',
+        //     subMenu     : []
+        // }, function (err) {
+        //     console.log(err);
+        // });
+
         // var Menu = mongoose.model("Menu");
 
         // var menu = new Menu({

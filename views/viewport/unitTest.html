@@ -8,9 +8,7 @@
 <script type="text/javascript" src="apps/<%= appName %>/test.js"></script>
 <% } %>
 <script type="text/javascript">
-    var params = {
-        test: true
-    };
+    var params = <%- JSON.stringify(params) %>;
     console.log(params);
 
     //判断当前环境：dev, test, product
