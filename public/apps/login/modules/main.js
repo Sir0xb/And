@@ -3,6 +3,10 @@ define(["knockout", "Super", "Tools"], function (ko, Super, Tools) {
         var self = Super.call(this, context);
 
         self.username = ko.observable('').extend({
+            required    : {
+                params  : true,
+                message : "请填写用户名"
+            },
             minLength   : {
                 params : 4,
                 message : "用户名至少四个字符"

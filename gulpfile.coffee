@@ -89,7 +89,7 @@ gulp.task "browser-sync", ->
         port    : 3000
 
 gulp.task "default", ->
-    runSequence "clean", "js", "html", "browser-sync"
+    runSequence "clean", "js", "html"#, "browser-sync"
 
     gulp.watch [
         "public/apps/#{appName}/modules/**/*.js"
@@ -98,5 +98,5 @@ gulp.task "default", ->
         "!public/apps/#{appName}/templates/**/*.tmpl.html"
     ], (->
         runSequence "clean", "js", "html"
-    )
-    .on "change", browserSync.reload for appName in apps
+    ) for appName in apps
+    #.on "change", browserSync.reload for appName in apps

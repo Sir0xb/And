@@ -3,19 +3,31 @@
         <form class="ui form">
             <div class="field">
                 <label>用户名</label>
-                <input type="text" name="username" placeholder="请输入用户名">
+                <div class="ui left icon input">
+                    <input type="text" name="username" placeholder="请输入用户名" data-bind="value: username, valueUpdate: 'keyup', validationElement: username">
+                    <i class="user icon"></i>
+                </div>
+            </div>
+            <div class="field error">
+                <label data-bind="validationMessage: username"></label>
             </div>
             <div class="field">
                 <label>密码</label>
-                <input type="text" name="password" placeholder="请输入密码">
+                <div class="ui left icon input">
+                    <input type="text" name="password" placeholder="请输入密码" data-bind="value: password, valueUpdate: 'keyup', validationElement: password">
+                    <i class="lock icon"></i>
+                </div>
+            </div>
+            <div class="field error">
+                <label data-bind="validationMessage: password"></label>
             </div>
             <div class="field">
                 <div class="ui checked checkbox">
-                    <input type="checkbox" checked="">
+                    <input type="checkbox" data-bind="checked: checked">
                     <label>我同意的条款和条件</label>
                 </div>
             </div>
-            <button class="ui green button" type="submit">提交</button>
+            <button class="ui green button" data-bind="click: submit, disable: !checked()">提交</button>
         </form>
     </div>
 </div>

@@ -120,13 +120,13 @@
 
   gulp.task("default", function() {
     var appName, i, len, results;
-    runSequence("clean", "js", "html", "browser-sync");
+    runSequence("clean", "js", "html");
     results = [];
     for (i = 0, len = apps.length; i < len; i++) {
       appName = apps[i];
       results.push(gulp.watch(["public/apps/" + appName + "/modules/**/*.js", "!public/apps/" + appName + "/modules/**/*.min.js", "public/apps/" + appName + "/templates/**/*.html", "!public/apps/" + appName + "/templates/**/*.tmpl.html"], (function() {
         return runSequence("clean", "js", "html");
-      })).on("change", browserSync.reload));
+      })));
     }
     return results;
   });

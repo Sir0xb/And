@@ -1,26 +1,46 @@
-define(["knockout", "Super"], function (ko, Super) {
+define(["knockout", "Super", "Tools"], function (ko, Super, Tools) {
     return function (context) {
         var self = Super.call(this, context);
 
         self.username = ko.observable('').extend({
-            required    : true,
-            minLength   : 4,
-            maxLength   : 20,
+            required    : {
+                params  : true,
+                message : "请填写用户名"
+            },
+            minLength   : {
+                params  : 4,
+                message : "用户名必须大于4个字符"
+            },
+            maxLength   : {
+                params  : 20,
+                message : "用户名不能长于20个字符"
+            },
             pattern     : {
-                message : "请输入长度为4-20的字母数字组成的用户名",
-                params  : '^[a-zA-Z0-9].$'
+                params  : /^[A-Za-z0-9]+$/,
+                message : "用户名只能由字母和数字构成"
             }
         });
 
         self.password = ko.observable('').extend({
-            required    : true,
-            minLength   : 4,
-            maxLength   : 20,
+            required    : {
+                params  : true,
+                message : "请填写密码"
+            },
+            minLength   : {
+                params  : 4,
+                message : "密码必须大于4个字符"
+            },
+            maxLength   : {
+                params  : 20,
+                message : "密码不能长于20个字符"
+            },
             pattern     : {
-                message : "请输入长度为4-20的字母数字组成的密码",
-                params  : '^[a-zA-Z0-9].$'
+                params  : /^[A-Za-z0-9]+$/,
+                message : "密码只能由字母和数字构成"
             }
         });
+
+        self.checked = ko.observable(true);
 
         self.errors = ko.validation.group(self);
         self.submit = function () {
@@ -28,6 +48,17 @@ define(["knockout", "Super"], function (ko, Super) {
                 self.errors.showAllMessages();
                 return false;
             }
+
+            Tools.ajax({
+                url: "/signup",
+                data: {
+                    username: self.username(),
+                    password: self.password()
+                },
+                success: function (returnData) {
+                    console.log(returnData);
+                }
+            });
         };
 
         if (self.data.test) {

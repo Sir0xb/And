@@ -10,6 +10,9 @@ function pageJump(req, res, next, path, title, appName, params) {
 
     console.log(message);
 
+    params = params || {};
+    params.test = true;
+
     res.render(req.query.unitTest ? "viewport/unitTest.html" : path, {
         user    : req.session.user,
         message : message,

@@ -21,8 +21,8 @@ MenuDao.prototype.save = function (obj, callback) {
     });
 };
 
-MenuDao.prototype.findByName = function (name, callback) {
-    Menu.findOne({ name: name }, function (err, obj) {
+MenuDao.prototype.findById = function (menuId, callback) {
+    Menu.findOne({ menuId: menuId }, function (err, obj) {
         callback(err, obj);
     });
 };
