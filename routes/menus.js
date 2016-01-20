@@ -1,4 +1,12 @@
+var Tools = require("./resTools");
+
 module.exports = function(app) {
+    var MenuDao = require("../models/menuDao");
+
+    app.get("/menus", function (req, res, next) {
+        Tools.log('Menus', 'get', 'menus', '请求访问菜单管理', 'menus');
+        Tools.pageJump(req, res, next, "index.html", "菜单管理", "menus");
+    });
 
     app.post("/menus/load", function(req, res, next) {
         // var Menu = mongoose.model("Menu");

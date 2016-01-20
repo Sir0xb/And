@@ -23,19 +23,24 @@ module.exports = function (app) {
             if (err) {
                 res.json({
                     success: false,
-                    message: '系统异常，请联系管理员'
+                    message: "系统异常，请联系管理员"
                 });
             } else if (obj) {
                 res.json({
                     success: false,
-                    message: '用户已存在'
+                    message: "用户已存在"
                 });
             } else {
                 UserDao.save({
                     username: username,
                     password: password
                 }, function (err) {
-                    console.log(err);
+                    if (!err) {
+                        res.json({
+                            success  : true,
+                            message  : "创建成功"
+                        });
+                    }
                 });
             }
         });

@@ -22,6 +22,12 @@ function pageJump(req, res, next, path, title, appName, params) {
         params  : params
     });
 }
+
+function log(from, type, url, status, to) {
+    console.log(from + ': (type)' + type.toUpperCase() + '; (url)/' + url + '; (status)' + status + '; (to)' + (to || '未定') + ';');
+}
+
 module.exports = {
-    pageJump : pageJump
+    pageJump : pageJump,
+    log      : log
 };

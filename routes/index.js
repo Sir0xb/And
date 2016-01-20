@@ -1,26 +1,26 @@
 var Tools = require("./resTools");
 
+var Customs = require("./Customs");
 var Login = require("./Login");
 var Signup = require("./Signup");
+var Menus = require("./Menus");
 
 module.exports = function (app) {
-    var MenuDao = require("../models/menuDao");
-
     app.get("/", function (req, res, next) {
-        if(!req.session.user){
-            return res.redirect("/login");
+        if (req.session.user) {
+            Tools.log('Route', 'get', '', '登录用户', 'welcome');
+            Tools.pageJump(req, res, next, "index.html", "首页", "welcome");
+        } else {
+            Tools.log('Route', 'get', '', '未登录用户', 'login');
+            Tools.pageJump(req, res, next, "index.html", "登录", "login");
         }
-
-        // MenuDao.findByName({}, function (err) {
-        //     console.log(err);
-        // });
-
-        Tools.pageJump(req, res, next, "index.html", "首页", "welcome", {
-            test: true
-        });
     });
 
+    Customs(app);
+
     Login(app);
-    
+
     Signup(app);
+
+    Menus(app);
 };

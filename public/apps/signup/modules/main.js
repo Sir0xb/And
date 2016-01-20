@@ -57,6 +57,10 @@ define(["knockout", "Super", "Tools"], function (ko, Super, Tools) {
                 },
                 success: function (returnData) {
                     console.log(returnData);
+                    if (returnData.success) {
+                        alert(returnData.message);
+                        location.href = "/";
+                    }
                 }
             });
         };

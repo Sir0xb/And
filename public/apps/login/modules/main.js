@@ -41,8 +41,11 @@ define(["knockout", "Super", "Tools"], function (ko, Super, Tools) {
                     username: self.username(),
                     password: self.password()
                 },
-                succss: function (returnData) {
+                success: function (returnData) {
                     console.log(returnData);
+                    if (returnData.success) {
+                        location.href = "/";
+                    }
                 }
             });
         };

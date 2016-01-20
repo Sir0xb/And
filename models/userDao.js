@@ -4,7 +4,10 @@ var Schema = mongodb.mongoose.Schema;
 var UserSchema = new Schema({
     username    : String,
     password    : String,
-    level       : Number,
+    level       : {
+        type    : String,
+        default : "7"
+    },
     create_date : {
         type    : Date,
         default : Date.now

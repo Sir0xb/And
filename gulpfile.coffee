@@ -17,6 +17,7 @@ rev     = require "gulp-rev"
 
 apps = [
     "login"
+    "menus"
     "signup"
     "test"
     "welcome"

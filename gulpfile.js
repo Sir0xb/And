@@ -25,7 +25,7 @@
 
   rev = require("gulp-rev");
 
-  apps = ["login", "signup", "test", "welcome"];
+  apps = ["login", "menus", "signup", "test", "welcome"];
 
   gulp.task("clean", function() {
     var appName, i, len, results;

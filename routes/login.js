@@ -4,23 +4,20 @@ module.exports = function(app) {
     var UserDao = require("../models/userDao");
 
     app.get("/login", function (req, res, next) {
-        if (req.session.user) {
-            Tools.pageJump(req, res, next, "index.html", "首页", "welcome");
-        } else {
-            Tools.pageJump(req, res, next, "index.html", "登录", "login");
-        }
+        Tools.log('Login', 'get', 'login', '请求登陆', 'login');
+        Tools.pageJump(req, res, next, "index.html", "登录", "login");
     });
 
     app.post("/login", function (req, res, next) {
         var username = req.body.username;
         var password = req.body.password;
 
-        console.log(username);
-        console.log(password);
+        Tools.log('Login', 'post', 'login', '用户名: ' + username);
+        Tools.log('Login', 'post', 'login', '密码: ' + password);
 
         UserDao.findByName(username, function (err, obj) {
-            console.log(err);
-            console.log(obj);
+            Tools.log('Login', 'post', 'findByName', 'error: ' + err);
+            Tools.log('Login', 'post', 'findByName', 'obj: ' + obj);
 
             if (err || !obj) {
                 res.json({
@@ -29,6 +26,7 @@ module.exports = function(app) {
                 });
             } else {
                 if (obj.username == username && obj.password == password) {
+                    req.session.user = username;
                     res.json({
                         success: true
                     });

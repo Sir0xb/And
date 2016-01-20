@@ -4,7 +4,10 @@ var Schema = mongodb.mongoose.Schema;
 var MenuSchema = new Schema({
     menuId      : String,
     menuName    : String,
-    level       : Number,
+    level       : {
+        type    : String,
+        default : "7"
+    },
     link        : String,
     desc        : String,
     subMenu     : Array
