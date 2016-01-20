@@ -8,7 +8,19 @@ module.exports = function(app) {
     });
 
     app.post("/login", function (req, res, next) {
-        req.flash("error", "用户名或密码错误");
-        return res.redirect("/login");
+        // req.flash("error", "用户名或密码错误");
+        // return res.redirect("/login");
+
+        res.json({
+            success: false,
+            username: req.body.username,
+            password: req.body.password
+        });
+
+        // res.json({
+        //     success: true,
+        //     username: req.body.username,
+        //     password: req.body.password
+        // });
     });
 };

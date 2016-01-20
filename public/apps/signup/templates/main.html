@@ -1,17 +1,21 @@
-<form class="ui form">
-    <div class="field">
-        <label>用户名</label>
-        <input type="text" name="username" placeholder="请输入用户名">
+<div class="ui grid center aligned">
+    <div class="seven wide column left aligned">
+        <form class="ui form">
+            <div class="field">
+                <label>用户名</label>
+                <input type="text" name="username" placeholder="请输入用户名">
+            </div>
+            <div class="field">
+                <label>密码</label>
+                <input type="text" name="password" placeholder="请输入密码">
+            </div>
+            <div class="field">
+                <div class="ui checked checkbox">
+                    <input type="checkbox" checked="">
+                    <label>我同意的条款和条件</label>
+                </div>
+            </div>
+            <button class="ui green button" type="submit">提交</button>
+        </form>
     </div>
-    <div class="field">
-        <label>密码</label>
-        <input type="text" name="password" placeholder="请输入密码">
-    </div>
-    <div class="field">
-        <div class="ui checkbox">
-            <input type="checkbox" tabindex="0" class="hidden">
-            <label>I agree to the Terms and Conditions</label>
-        </div>
-    </div>
-    <button class="ui button" type="submit">Submit</button>
-</form>
+</div>

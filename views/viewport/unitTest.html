@@ -12,6 +12,28 @@
         test: true
     };
     console.log(params);
+
+    //判断当前环境：dev, test, product
+    (function(location){
+        var env;
+        switch(location.hostname){
+            case '127.0.0.1' :
+            case 'localhost' :
+                env = 'dev';
+                params.test = true;
+            break;
+            case 'trustee.test.17zuoye.net' :
+                env = 'test';
+            break;
+            case 'trustee.17zuoye.net' :
+                env = 'product';
+            break;
+            default:
+                env = 'test';
+            break;
+        }
+        params.env = env; //暴漏到params
+    })(window.location);
 </script>
 <% if(showTest || false){ %>
 <script type="text/javascript">

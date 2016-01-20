@@ -60,7 +60,7 @@ gulp.task "clean:html", ->
 
 gulp.task "html", ["clean:html"], ->
     options =
-        removeComments                  : true      # 清除HTML注释
+        removeComments                  : false      # 清除HTML注释
         collapseWhitespace              : true      # 压缩HTML
         collapseBooleanAttributes       : true      # 省略布尔属性的值 <input checked="true"/> ====> <input />
         removeEmptyAttributes           : true      # 删除所有空格作属性值 <input id="" /> ====> <input />
@@ -85,8 +85,8 @@ gulp.task "html", ["clean:html"], ->
 gulp.task "browser-sync", ->
     browserSync.init
         proxy   : "http://localhost:5678"
-        files   : ["public/**/*.*"]
-        port    : 5000
+        files   : ["./**/*.html", "./**/*.css", "./**/*.js", "./**/*.json"]
+        port    : 3000
 
 gulp.task "default", ->
     runSequence "clean", "js", "html", "browser-sync"

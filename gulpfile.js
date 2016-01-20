@@ -87,7 +87,7 @@
   gulp.task("html", ["clean:html"], function() {
     var appName, i, len, options, results;
     options = {
-      removeComments: true,
+      removeComments: false,
       collapseWhitespace: true,
       collapseBooleanAttributes: true,
       removeEmptyAttributes: true,
@@ -113,8 +113,8 @@
   gulp.task("browser-sync", function() {
     return browserSync.init({
       proxy: "http://localhost:5678",
-      files: ["public/**/*.*"],
-      port: 5000
+      files: ["./**/*.html", "./**/*.css", "./**/*.js", "./**/*.json"],
+      port: 3000
     });
   });
 
