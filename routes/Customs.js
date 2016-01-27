@@ -6,7 +6,13 @@ module.exports = function (app) {
 
         if (!req.session.user) {
             Tools.log('Customs', 'get', req.params.url, '未登录用户', 'login');
-            Tools.pageJump(req, res, next, "index.html", "登录", "login");
+            if (req.params.url == 'signup') {
+                Tools.pageJump(req, res, next, "index.html", "注册", "signup", {
+                    test: true
+                });
+            } else {
+                Tools.pageJump(req, res, next, "index.html", "登录", "login");
+            }
         } else {
             Tools.log('Customs', 'get', req.params.url, '登陆用户，放行');
             next();
