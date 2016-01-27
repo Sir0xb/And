@@ -1,14 +1,4 @@
 define(["knockout", "jquery", "Tools", "ko-mapping", "semantic"], function (ko, $, Tools) {
-    function saveMenu(menus) {
-        Tools.ajax({
-            url: "/menus/save",
-            data: menus,
-            success: function (returnData) {
-                console.log(returnData);
-            }
-        });
-    }
-
     return function (context) {
         var self = this;
 
@@ -16,30 +6,19 @@ define(["knockout", "jquery", "Tools", "ko-mapping", "semantic"], function (ko, 
         self.data = context.data;
 
         self.root = self.data.menus[0];
-        self.menuList = self.root.subMenu
+        self.menuList = ko.observableArray(ko.mapping.fromJS(self.root.subMenu)());
 
+        self.updateMenu = function () {
+            self.root.subMenu = ko.mapping.toJS(self.menuList);
+            Tools.ajax({
+                url: "/menus/update",
+                data: { menus: [self.root] },
+                success: function (returnData) {
+                    console.log(returnData);
+                }
+            });
+        };
 
-        // 要从mongodb获取
-        var menuList = self.data.menus[0].submenus;
-        // var menuList = [
-        //     { id: "menus", text: "菜单管理", description: "系统菜单管理与配置", link: "#/menus", submenus: [] },
-        //     { id: "users", text: "用户管理", description: "系统用户管理与配置", link: "#/users", submenus: [] },
-        //     { id: "apps", text: "应用管理", description: "应用配置", link: "#/apps", submenus: [
-        //         { id: "ftpFiles", text: "CDN文件监控", description: '', link: "#/apps/ftpfiles", submenus: [] },
-        //         { id: "cdnFrames", text: "框架版本管理", description: '',link: "#/apps/cdnfiles", submenus: [] },
-        //         { id: "ftpFiles12", text: "CDN文件监控12", description: '',link: "#/apps/ftpfiles12", submenus: [] },
-        //         { id: "cdnFrames12", text: "框架版本管理12", description: '',link: "#/apps/cdnfiles12", submenus: [
-        //             { id: "hehe", text: "呵呵", description: '',link: "#/apps/hehe" },
-        //             { id: "hehe1", text: "呵呵", description: "描素测试描素测试描素测试描素测试描素测试描素测试描素测试描素测试描素测试描素测试描素测试描素测试", link: "#/apps/hehe" },
-        //             { id: "hehe2", text: "呵呵", description: '',link: "#/apps/hehe" },
-        //             { id: "hehe3", text: "呵呵", description: '',link: "#/apps/hehe" }
-        //         ] },
-        //         { id: "ftpFiles34", text: "CDN文件监控34", description: '',link: "#/apps/ftpfiles34", submenus: [] },
-        //         { id: "cdnFrames34", text: "框架版本管理34", description: '',link: "#/apps/cdnfiles34", submenus: [] }
-        //     ] },
-        //     { id: "demos", text: "测试用例", description: "测试用例管理", link: "#/demos", submenus: [] },
-        //     { id: "crooms", text: "会议室预约", description: "会议室预约管理", link: "#/crooms", submenus: [] }
-        // ];
 
         self.getNewNode = function () {
             return ko.mapping.fromJS({
@@ -52,7 +31,6 @@ define(["knockout", "jquery", "Tools", "ko-mapping", "semantic"], function (ko, 
             });
         };
 
-        self.menuList = ko.observableArray(ko.mapping.fromJS(menuList)());
         self._focusMenu = ko.observable(self.getNewNode());
         self.focusMenu = ko.observable(ko.utils.extend(self.getNewNode(), {
             submenus: self.menuList
