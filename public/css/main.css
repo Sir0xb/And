@@ -205,3 +205,28 @@ body {
         transform: translate(0, 0);
     }
 }
+
+.mt20{
+    margin-top: 20px !important;
+}
+.ml20{
+    margin-left: 20px !important;
+}
+.mb20{
+    margin-bottom: 20px !important;
+}
+.w50{
+    width: 50% !important;
+}
+.w80{
+    width: 80% !important;
+}
+.w300{
+    width: 300px !important;
+}
+.dib{
+    display: inline-block !important;
+}
+.vat{
+    vertical-align: top !important;
+}

@@ -4,6 +4,7 @@ var Customs = require("./Customs");
 var Login = require("./Login");
 var Signup = require("./Signup");
 var Menus = require("./Menus");
+var ResourceDepot = require("./ResourceDepot");
 
 module.exports = function (app) {
     app.get("/", function (req, res, next) {
@@ -23,4 +24,6 @@ module.exports = function (app) {
     Signup(app);
 
     Menus(app);
+
+    ResourceDepot(app);
 };

@@ -1,0 +1,95 @@
+<div class="ui grid mb20">
+	<div class="column twelve wide">
+		<div class="ui form  mt20">
+			<div class="inline field">
+				<label>资源名称：</label>
+				<input class="w80" type="text">	
+			</div>
+			<div class="inline field">
+				<label>类别：</label>
+				<select class="w80" data-bind="options: types, optionsValue: 'value', optionsText: 'name', value: formData.type"></select>
+			</div>
+			<div class="inline field">
+				<label class="vat">demo：</label>
+				<div class="dib">
+					<ul class="ui list dib vat">
+						<li class="item">
+							<span>xxxxx</span>
+							<i class="icon remove red dib"></i>
+						</li>
+					</ul>
+					<button class="button ui green vat ml20">上传</button>
+				</div>
+			</div>
+			<div class="inline field">
+				<label>官网地址：</label>
+				<input class="w80" type="text">
+			</div>
+			<div class="inline field">
+				<label>维护者：</label>
+				<input class="w80" type="text">
+			</div>
+			<div class="inline field">
+				<label>维护者QQ：</label>
+				<input class="w80" type="text">
+			</div>
+			<div class="inline field">
+				<label>简介：</label>
+				<textarea class="w80"></textarea>
+			</div>
+			<div class="inline field">
+				<label class="vat">版本信息：</label>
+				<div class="dib">
+					<div class="ui cards">
+						<div class="card" style="width:400px;">
+							<div class="content">
+								<div class="ui form">
+									<div class="inline field">
+										<label>版本号：</label>
+										<input class="w300" type="text">
+									</div>
+									<div class="inline field">
+										<label>文件：</label>
+										<div class="dib">
+											<ul>
+												<li>
+													<input class="w300" type="text" placeholder="文件名称">
+													<input class="w300" type="text" placeholder="相对路径">
+													<input class="w300" type="text" placeholder="cdn地址">
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="ui bottom attached button">
+								<i class="add icon"></i>新增文件
+							</div>
+						</div>
+					</div>
+
+					<div>
+						<button class="ui button green mt20">新增版本</button>	
+					</div>
+				</div>
+			</div>
+			<div class="inline field">
+				<label>使用方法：</label>
+				<textarea class="w80"></textarea>
+			</div>
+			<div class="inline field">
+				<label>备注：</label>
+				<textarea class="w80"></textarea>
+			</div>
+			<div class="inline field">
+				<label>&nbsp;</label>
+				<button class="ui button blue" type="submit">Submit</button>
+			</div>
+			
+		</div>
+	</div>
+
+	<div class="column four wide">
+		
+	</div>
+</div>
