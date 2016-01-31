@@ -120,7 +120,7 @@
 
   gulp.task("default", function() {
     var appName, i, len, results;
-    runSequence("clean", "js", "html");
+    runSequence("clean", "js", "html", "browser-sync");
     results = [];
     for (i = 0, len = apps.length; i < len; i++) {
       appName = apps[i];

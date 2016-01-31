@@ -41,6 +41,8 @@
     "ejs": "*",
     "express": "^4.13.3",
     "express-session": "^1.12.1",
-    "mongodb": "*"
+    "file-stream-rotator": "0.0.6",
+    "mongodb": "*",
+    "morgan": "^1.6.1"
   }
 }
