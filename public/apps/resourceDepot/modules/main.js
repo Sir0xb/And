@@ -19,7 +19,7 @@ define(['knockout', 'sammy'], function(ko, Sammy){
                         data    : self.data
                     },
                     afterRender: function (){
-
+                        $('body').trigger(module+'_page_ready');
                     }
                 });
                 self.parent.loading(true);

@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="skins/default/style.css">
+		<script src="../jquery-1.9.1/jquery.js"></script>
+		<script src="../webuploader/webuploader.min.js"></script>
+		<script src="skins/default/tpl.js"></script>
+		<script src="YQuploader.js"></script>
+		<style>
+
+		</style>
+	</head>
+	<body>
+		<div id="upload_container"></div>
+		<script>
+		$(function(){
+			var uploader = new YQuploader({
+				server: '/test/YQuploader-1.0/server/fileupload.php',
+				accept:{
+					title: 'image',
+					extensions: 'png,jpg'
+				},
+				auto: true,
+				skin_tpl: skin_tpl,
+				pick:{
+					id: '.uploader_pick',
+	                label: '',
+					innerHTML: '上传资源',
+	                multiple: true
+				},
+				onCustomUploadSuccess: function(){
+					
+				}
+			});
+
+		});
+		</script>
+	</body>
+</html>
