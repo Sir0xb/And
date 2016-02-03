@@ -1,4 +1,4 @@
-define(['knockout', 'uploader', 'marked', 'highlight', '../../../lib/YQuploader-1.0/skins/default/tpl', 'css!../../../lib/YQuploader-1.0/skins/default/style'], function(ko, YQuploader, marked, highlight, skin){
+define(['knockout', 'Tools', 'uploader', 'marked', 'hljs', '../../../lib/YQuploader-1.0/skins/default/tpl', 'css!../../../lib/YQuploader-1.0/skins/default/style', 'css!../../../lib/highlight/styles/monokai-sublime', 'ko-mapping'], function(ko, $tools, YQuploader, marked, highlight, skin){
 	return function (context) {
 		var self = this;
 
@@ -24,13 +24,25 @@ define(['knockout', 'uploader', 'marked', 'highlight', '../../../lib/YQuploader-
         	self.formData.versionPackage.push({version: ko.observable(''), files: ko.observableArray([{name: ko.observable(''), devUrl: ko.observable(''), cdn: ko.observable('')}])});
         }
 
+        self.submit = function(){
+        	var sdata = ko.mapping.toJS(self.formData);
+        	console.log(sdata);
+        	$tools.ajax({
+        		url: '/resourceDepot/save',
+        		data: {resource: sdata},
+        		success: function(data){
+        			
+        		}
+        	});
+        }
+
         $('body').on('add_page_ready', function(){
         	//初始化上传控件
 	        var uploader = new YQuploader({
-				server: '/test/YQuploader-1.0/server/fileupload.php',
+				server: '/upload',
 				accept:{
 					title: 'html',
-					extensions: 'html,htm,zip,png,pdf'
+					extensions: 'html,htm,zip,png,pdf,gif'
 				},
 				auto: true,
 				skin_tpl: skin,
@@ -40,12 +52,11 @@ define(['knockout', 'uploader', 'marked', 'highlight', '../../../lib/YQuploader-
 					innerHTML: '上传',
 	                multiple: true
 				},
-				onCustomUploadSuccess: function(){
-					
+				onCustomUploadSuccess: function(file, data){
+					self.formData.demoUrls.push({name: data.message.name, url: data.message.url});
 				}
 			});
         });
-
 
         self.formData = {
         	id: ko.observable(''),
@@ -63,8 +74,8 @@ define(['knockout', 'uploader', 'marked', 'highlight', '../../../lib/YQuploader-
         };
 
         marked.setOptions({
-			highlight: function (code) {
-				return require('highlight.js').highlightAuto(code).value;
+			highlight: function (code, lang, callback) {
+				return highlight.highlightBlock($('<code>'+code+'</code>')[0]);
 			}
 		});
 

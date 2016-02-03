@@ -12,7 +12,7 @@
 }(this, function () {
     var tpl = [
         '<div class="uploader_skin_default">',
-            '<div class="uploader_list"></div>',
+            '<div class="uploader_list ui list dib vat"></div>',
             '<div class="uploader_btn">',
                 '<div class="uploader_pick">选择文件</div>',
             '</div>',
@@ -22,8 +22,9 @@
 
     var createItemHTML = function(file, instance){
         var itemHTML = [
-            '<div class="uploader_list_item" id="'+instance.id+'-'+file.id+'">',
-                '<div class="uploader_filename">'+file.name+'</div>',
+            '<div class="uploader_list_item item" id="'+instance.id+'-'+file.id+'">',
+                '<div class="uploader_filename dib">'+file.name+'</div>',
+                '<i class="icon remove red dib ml20" title="删除"></i>',
                 '<div class="uploader_progress">',
                     '<div class="uploader_progress_bar" style="width:0%;"></div>',
                 '</div>',

@@ -12,12 +12,12 @@
 			<div class="inline field">
 				<label class="vat">demo：</label>
 				<div class="dib">
-					<ul class="ui list dib vat" data-bind="foreach: formData.demoUrls">
+					<!-- <ul class="ui list dib vat" data-bind="foreach: formData.demoUrls">
 						<li class="item">
 							<span data-bind="text: $data"></span>
 							<i class="icon remove red dib" title="删除"></i>
 						</li>
-					</ul>
+					</ul> -->
 					<div id="upload_container"></div>
 				</div>
 			</div>
@@ -83,14 +83,14 @@
 			</div>
 			<div class="inline field">
 				<label>&nbsp;</label>
-				<button class="ui button blue" type="submit">Submit</button>
+				<button class="ui button blue" type="submit" data-bind="click: submit">Submit</button>
 			</div>
 			
 		</div>
 	</div>
 
 	<div class="column four wide">
-		<div style="position: fixed;">
+		<div style="position: fixed; width: 300px;">
 			<h3>使用方法</h3>
 			<div data-bind="html: parsedUseMethod" style="max-height: 600px;overflow: auto;"></div>
 		</div>

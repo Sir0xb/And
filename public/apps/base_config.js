@@ -13,7 +13,7 @@ require.config({
         "webuploader"           : "lib/webuploader/webuploader.min",
         "uploader"              : "lib/YQuploader-1.0/YQuploader",
         "marked"                : "lib/marked/marked.min",
-        "highlight"             : "lib/highlight/highlight",
+        "hljs"                  : "lib/highlight/highlight.min",
 
         "ko-textcut"            : "ko-path/koTextcutHandler",
         "ko-hover"              : "ko-path/koHoverHandler",

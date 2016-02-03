@@ -4,7 +4,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 
 */
 
-.hljs {
+.hljs, code {
   display: block;
   overflow-x: auto;
   padding: 0.5em;
@@ -12,6 +12,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 }
 
 .hljs,
+code,
 .hljs-tag,
 .hljs-subst {
   color: #f8f8f2;
