@@ -11,7 +11,7 @@ var ResourceSchema = new Schema({
     siteUrl: String, //官网地址
     owner: String,  //维护者
     ownerQQ: String,  //维护者QQ
-    comment: String  //备注
+    comment: String,  //备注
     lastModified: String, //上次修改时间
     versionPackage: [
         {           
@@ -31,29 +31,30 @@ var Resource = mongodb.mongoose.model("Resource", ResourceSchema);
 
 var ResourceDao = function () {};
 
-Resource.prototype.save = function (obj, callback) {
+ResourceDao.prototype.save = function (obj, callback) {
     var instance = new Resource(obj);
+
     instance.save(function (err) {
         callback(err);
     });
 };
 
-Resource.prototype.updateById = function (menuId, callback) {
+ResourceDao.prototype.updateById = function (menuId, callback) {
     Menu.update({ menuId: menuId }, function (err) {
         callback(err);
     });
 };
 
-Resource.prototype.findById = function (menuId, callback) {
+ResourceDao.prototype.findById = function (menuId, callback) {
     Menu.findOne({ menuId: menuId }, function (err, obj) {
         callback(err, obj);
     });
 };
 
-Resource.prototype.findAll = function (callback) {
+ResourceDao.prototype.findAll = function (callback) {
     Menu.find({}, function (err, obj) {
         callback(err, obj);
     });
 }
 
-module.exports = new Resource();
+module.exports = new ResourceDao();
