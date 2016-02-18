@@ -206,11 +206,17 @@ body {
     }
 }
 
+.mt10{
+    margin-top: 10px !important;
+}
 .mt20{
     margin-top: 20px !important;
 }
 .ml20{
     margin-left: 20px !important;
+}
+.ml50{
+    margin-left: 50px !important;
 }
 .mb20{
     margin-bottom: 20px !important;
@@ -229,4 +235,13 @@ body {
 }
 .vat{
     vertical-align: top !important;
+}
+.p20{
+    padding: 20px;
+}
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
 }

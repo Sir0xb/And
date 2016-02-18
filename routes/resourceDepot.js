@@ -23,4 +23,33 @@ module.exports = function(app) {
     	});
     });
 
+    app.post("/resourceDepot/list", function(req, res, next){
+    	Tools.log("Resource", "post", "resource/list", "资源列表");
+
+    	ResourceDao.list(function(err, data){
+    		if(err){
+				res.send({success: false, error: err});
+			}
+			else{
+				res.send({success: true, data: data});
+			}
+    	});
+    });
+
+    app.post("/resourceDepot/get", function(req, res, next){
+
+        var id = req.body.id;
+
+        Tools.log("Resource", "post", "resource/get", "获取资源");
+
+        ResourceDao.findById(id, function(err, data){
+            if(err){
+                res.send({success: false, error: err});
+            }
+            else{
+                res.send({success: true, data: data});
+            }
+        });
+    });
+
 };

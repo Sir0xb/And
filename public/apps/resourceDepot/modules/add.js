@@ -1,20 +1,11 @@
-define(['knockout', 'Tools', 'uploader', 'marked', 'hljs', '../../../lib/YQuploader-1.0/skins/default/tpl', 'css!../../../lib/YQuploader-1.0/skins/default/style', 'css!../../../lib/highlight/styles/monokai-sublime', 'ko-mapping'], function(ko, $tools, YQuploader, marked, highlight, skin){
+define(['knockout', 'Tools', 'uploader', 'marked', 'hljs', '../../../lib/YQuploader-1.0/skins/default/tpl', './dataMap', 'css!../../../lib/YQuploader-1.0/skins/default/style', 'css!../../../lib/highlight/styles/monokai-sublime', 'ko-mapping'], function(ko, $tools, YQuploader, marked, highlight, skin, dataMap){
 	return function (context) {
 		var self = this;
 
         self.parent = context.parent;
         self.data = context.data;
 
-        self.types = [
-        	{
-	        	name: 'PC端',
-	        	value: 1
-	        },
-	        {
-	        	name: '移动端',
-	        	value: 2
-	        },
-        ];
+        self.types = dataMap.types;
 
         self.addFile = function(){
         	this.files.push({name: ko.observable(''), devUrl: ko.observable(''), cdn: ko.observable('')});
@@ -69,7 +60,6 @@ define(['knockout', 'Tools', 'uploader', 'marked', 'hljs', '../../../lib/YQuploa
 			owner: ko.observable(''),
 			ownerQQ: ko.observable(''),
 			comment: ko.observable(''),
-			lastModified: ko.observable(''),
 			versionPackage: ko.observableArray([{version: ko.observable(''), files: ko.observableArray([{name: ko.observable(''), devUrl: ko.observable(''), cdn: ko.observable('')}])}])
         };
 

@@ -1,0 +1,31 @@
+<div class="ui grid">
+	<div class="row">
+		<div class="column right aligned">
+			<a href="#/add" class="ui button green">添加</a>
+		</div>
+	</div>
+	<!-- ko foreach: typeList -->
+	<div class="column sixteen wide resourcelist">
+		<h2 data-bind="text: name"></h2>
+		<div class="ui cards three" data-bind="foreach: $parent.dataList">
+			<!-- ko if: type==$parent.value -->
+			<div class="card grey">
+				<div class="content">
+					<a class="header" data-bind="text: title, attr: {href: '#/detail/'+id}"></a>
+					<div class="meta" data-bind="text: lastModified">
+					</div>
+					<p data-bind="text: description"></p>
+				</div>
+				<div class="extra content">
+					<div class="ui two buttons">
+						<div class="ui basic green button">编辑</div>
+						<div class="ui basic red button">删除</div>
+					</div>
+			    </div>
+			</div>
+			<!-- /ko -->
+		</div>
+	</div>
+	<!-- /ko -->
+
+</div>

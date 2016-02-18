@@ -40,7 +40,7 @@ module.exports = function(app) {
                 } else {
                     //上传成功，返回文件的相对路径
                     var fileUrl = '/public/upload/' + fileName;
-                    res.json({success: true, message: {fileUrl: fileUrl} });
+                    res.json({success: true, message: {name: fileName, url: fileUrl} });
                 }
             });
 	        

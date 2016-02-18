@@ -9,8 +9,10 @@ define(['knockout', 'sammy'], function(ko, Sammy){
         self.palette = ko.observable();
 
 		Sammy(function () {
-            this.get(/\#\/([^/]+)/, function (){
+            this.get(/\#\/([^/]+)\/?([^/]*)/, function (){
                 var module    = this.params.splat[0];
+                var itemId    = this.params.splat[1];
+                self.data.itemId = itemId;
         
                 self.palette({
                     name: module,
@@ -20,6 +22,7 @@ define(['knockout', 'sammy'], function(ko, Sammy){
                     },
                     afterRender: function (){
                         $('body').trigger(module+'_page_ready');
+                        self.parent.loading(false);
                     }
                 });
                 self.parent.loading(true);
@@ -28,7 +31,6 @@ define(['knockout', 'sammy'], function(ko, Sammy){
         
         Sammy().run();
 
-        self.parent.loading(false);
 
         //debug
         window.add = self;
