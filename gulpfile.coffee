@@ -16,6 +16,7 @@ clean   = require "gulp-clean"
 rev     = require "gulp-rev"
 
 apps = [
+    "demos"
     "login"
     "menus"
     "signup"

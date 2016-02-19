@@ -1,6 +1,7 @@
 var Tools = require("./resTools");
 
 var Customs = require("./Customs");
+var Demos = require("./Demos");
 var Login = require("./Login");
 var Signup = require("./Signup");
 var Menus = require("./Menus");
@@ -17,6 +18,8 @@ module.exports = function (app) {
     });
 
     Customs(app);
+
+    Demos(app);
 
     Login(app);
 

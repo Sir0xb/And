@@ -25,7 +25,7 @@
 
   rev = require("gulp-rev");
 
-  apps = ["login", "menus", "signup", "test", "welcome"];
+  apps = ["demos", "login", "menus", "signup", "test", "welcome"];
 
   gulp.task("cleanLog", function() {
     return gulp.src(["log/*.log"], {

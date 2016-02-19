@@ -18,6 +18,11 @@ define(["knockout", "semantic", "ko-mapping", "ko-validation"], function (ko) {
             },
             message: 'The field must equal {0}'
         };
+        ko.validation.rules['link'] = {
+            validator: function (val, reg) {
+                return reg.test(val);
+            }
+        };
         ko.validation.registerExtenders();
 
         self.parent = context.parent;

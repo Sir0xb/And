@@ -8,6 +8,12 @@ module.exports = function(app) {
         Tools.pageJump(req, res, next, "index.html", "登录", "login");
     });
 
+    app.get("/logout", function (req, res, next) {
+        req.session.user = null;
+        Tools.log('Login', 'get', 'logout', '请求退出系统', 'login');
+        Tools.pageJump(req, res, next, "index.html", "登录", "login");
+    });
+
     app.post("/login", function (req, res, next) {
         var username = req.body.username;
         var password = req.body.password;

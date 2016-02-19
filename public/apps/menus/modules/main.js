@@ -50,9 +50,11 @@ define(["knockout", "jquery", "Super", "Tools", "ko-mapping", "semantic"], funct
             subMenu     : []
         }));
 
+        self.focusMenuLevel = ko.observable(0);
         self._focusMenuParent = ko.observable(false);
-        self.selectMenu = function (parent) {
+        self.selectMenu = function (parent, level) {
             self.focusMenu(this);
+            self.focusMenuLevel(level);
             self._focusMenuParent(parent);
         };
 

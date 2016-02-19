@@ -15,7 +15,7 @@
                 <!-- /ko -->
 
                 <div class="content">
-                    <a href="javascript:void(0);" data-bind="click: $parent.selectMenu.bind($data, false)">
+                    <a href="javascript:void(0);" data-bind="click: $parent.selectMenu.bind($data, false, 0)">
                         <div class="header" data-bind="text: menuName"></div>
                         <div class="description" data-bind="text: desc"></div>
                     </a>
@@ -35,7 +35,7 @@
                             <!-- /ko -->
 
                             <div class="content">
-                                <a href="javascript:void(0);" data-bind="click: $parents[1].selectMenu.bind($data, $parent)">
+                                <a href="javascript:void(0);" data-bind="click: $parents[1].selectMenu.bind($data, $parent, 1)">
                                     <div class="header" data-bind="text: menuName"></div>
                                     <div class="description" data-bind="text: desc"></div>
                                 </a>
@@ -57,10 +57,46 @@
                                         <!-- /ko -->
 
                                         <div class="content">
-                                            <a href="javascript:void(0);" data-bind="click: $parents[2].selectMenu.bind($data, $parent)">
+                                            <a href="javascript:void(0);" data-bind="click: $parents[2].selectMenu.bind($data, $parent, 2)">
                                                 <div class="header" data-bind="text: menuName"></div>
                                                 <div class="description" data-bind="text: desc"></div>
                                             </a>
+                                            <!-- ko if: $data["subMenu"] -->
+                                            <div class="list">
+                                                <!-- ko foreach: subMenu -->
+                                                <div class="item">
+                                                    <!-- ko if: menuId() != '' -->
+
+                                                    <!-- 有子菜单显示成文件夹图标 -->
+                                                    <!-- ko if: $data["subMenu"] && subMenu().length > 0 -->
+                                                    <i class="book icon" data-bind="css: { 'pointing right red': $parents[3].focusMenu().menuId() == menuId() }"></i>
+                                                    <!-- /ko -->
+
+                                                    <!-- 没有子菜单显示成叶子图标 -->
+                                                    <!-- ko ifnot: $data["subMenu"] && subMenu().length > 0 -->
+                                                    <i class="leaf icon" data-bind="css: { 'pointing right red': $parents[3].focusMenu().menuId() == menuId() }"></i>
+                                                    <!-- /ko -->
+
+                                                    <div class="content">
+                                                        <a href="javascript:void(0);" data-bind="click: $parents[3].selectMenu.bind($data, $parent, 3)">
+                                                            <div class="header" data-bind="text: menuName"></div>
+                                                            <div class="description" data-bind="text: desc"></div>
+                                                        </a>
+                                                    </div>
+
+                                                    <!-- /ko -->
+
+                                                    <!-- ko ifnot: menuId() != '' -->
+
+                                                    <div class="content">
+                                                        <div class="header" data-bind="text: menuName"></div>
+                                                    </div>
+
+                                                    <!-- /ko -->
+                                                </div>
+                                                <!-- /ko -->
+                                            </div>
+                                            <!-- /ko -->
                                         </div>
 
                                         <!-- /ko -->
@@ -112,11 +148,11 @@
                     <input type="text" data-bind="value: focusMenu().link, disable: true">
                 </div>
             </div>
-            <button class="ui inverted orange button" data-bind="disable: focusMenu().menuId() == '' || focusMenu().menuId() == 'root', click: editMenu">编辑</button>
-            <button class="ui inverted green button" data-bind="disable: focusMenu().menuId() == '', click: addSubMenu">添加子菜单</button>
-            <button class="ui inverted violet button" data-bind="disable: focusMenu().menuId() == '', click: addDescMenu">添加说明子菜单</button>
-            <button class="ui inverted blue button" data-bind="disable: focusMenu().menuId() == '' || focusMenu().menuId() == 'root', click: addLine">添加横线</button>
-            <button class="ui inverted red button" data-bind="disable: focusMenu().menuId() == '' || (focusMenu().subMenu && focusMenu().subMenu().length > 0) || focusMenu().menuId() == 'root', click: removeMenu">删除</button>
+            <button class="ui inverted orange button" data-bind="disable: focusMenu().menuId() == '' || [0].indexOf(focusMenuLevel()) != -1, click: editMenu">编辑</button>
+            <button class="ui inverted green button" data-bind="disable: focusMenu().menuId() == '' || [3].indexOf(focusMenuLevel()) != -1, click: addSubMenu">添加子菜单</button>
+            <button class="ui inverted violet button" data-bind="disable: focusMenu().menuId() == '' || [0, 3].indexOf(focusMenuLevel()) != -1, click: addDescMenu">添加说明子菜单</button>
+            <button class="ui inverted blue button" data-bind="disable: focusMenu().menuId() == '' || [0, 3].indexOf(focusMenuLevel()) != -1, click: addLine">添加横线</button>
+            <button class="ui inverted red button" data-bind="disable: focusMenu().menuId() == '' || (focusMenu().subMenu && focusMenu().subMenu().length > 0) || [0].indexOf(focusMenuLevel()) != -1, click: removeMenu">删除</button>
             <button class="ui inverted olive button" data-bind="click: function(){ location.reload(); }">更新主菜单</button>
         </div>
         <h2 class="ui dividing header"></h2>
