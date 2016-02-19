@@ -1,14 +1,14 @@
-define(["knockout"], function (ko) {
+define(["knockout", "jquery"], function (ko, $) {
     return function (context) {
         var self = this;
 
         self.parent = context.parent;
         self.data = context.data;
 
-        self.text1 = "string";
-        self.text2 = ko.observable("string");
-        self.text3 = ko.observable("string");
-        self.text4 = ko.observable("<s>string</s>");
+        self.text1 = "测试数据内容";
+        self.text2 = ko.observable("测试数据内容");
+        self.text3 = ko.observable("测试数据内容");
+        self.text4 = ko.observable("<s>测试数据内容</s>");
         self.text5 = function () {
             console.log('text5 函数被运行');
             return "string";
@@ -31,8 +31,8 @@ define(["knockout"], function (ko) {
         self.parent.loading(false);
 
         //监听测试
-        ko.utils.registerEventHandler(document.body, "pageReady", function () {
-            console.log("ko event");
+        $('body').one('pageReady', function () {
+            $('.ui.accordion').accordion();
         });
 
         //测试接口
