@@ -1,0 +1,45 @@
+<i class="close icon"></i>
+<div class="header">添加子菜单</div>
+<div class="content">
+    <div class="twelve wide column">
+        <div class="ui form">
+            <div class="three fields">
+                <div class="required field">
+                    <label>菜单ID</label>
+                    <input type="text" data-bind="value: focusMenu().menuId, valueUpdate: 'keyup', validationElement: focusMenu().menuId">
+                    <div class="field error">
+                        <label data-bind="validationMessage: focusMenu().menuId"></label>
+                    </div>
+                </div>
+                <div class="required field">
+                    <label>菜单名称</label>
+                    <input type="text" data-bind="value: focusMenu().menuName, valueUpdate: 'keyup', validationElement: focusMenu().menuName">
+                    <div class="field error">
+                        <label data-bind="validationMessage: focusMenu().menuName"></label>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>菜单等级</label>
+                    <select class="ui fluid dropdown" data-bind="options: [7, 6, 5, 4, 3, 2, 1], optionText: $data, optionValue: $data, value: focusMenu().level"></select>
+                </div>
+            </div>
+            <div class="three fields">
+                <div class="field">
+                    <label>描述</label>
+                    <input type="text" data-bind="value: focusMenu().desc, valueUpdate: 'keyup'">
+                </div>
+                <div class="required field">
+                    <label>应用地址</label>
+                    <input type="text" data-bind="value: focusMenu().link, valueUpdate: 'keyup', validationElement: focusMenu().link">
+                    <div class="field error">
+                        <label data-bind="validationMessage: focusMenu().link"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="actions">
+    <div class="ui black deny button">取消</div>
+    <div class="ui blue right button" data-bind="click: submit">确定</div>
+</div>

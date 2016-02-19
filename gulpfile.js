@@ -27,6 +27,13 @@
 
   apps = ["login", "menus", "signup", "test", "welcome"];
 
+  gulp.task("cleanLog", function() {
+    return gulp.src(["log/*.log"], {
+      read: false,
+      force: true
+    }).pipe(clean());
+  });
+
   gulp.task("clean", function() {
     var appName, i, len, results;
     results = [];
@@ -120,7 +127,7 @@
 
   gulp.task("default", function() {
     var appName, i, len, results;
-    runSequence("clean", "js", "html", "browser-sync");
+    runSequence("cleanLog", "clean", "js", "html");
     results = [];
     for (i = 0, len = apps.length; i < len; i++) {
       appName = apps[i];

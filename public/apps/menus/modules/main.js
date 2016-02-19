@@ -1,121 +1,134 @@
-define(["knockout", "jquery", "Tools", "ko-mapping", "semantic"], function (ko, $, Tools) {
+define(["knockout", "jquery", "Super", "Tools", "ko-mapping", "semantic"], function (ko, $, Super, Tools) {
     return function (context) {
-        var self = this;
+        var self = Super.call(this, context);
 
-        self.parent = context.parent;
-        self.data = context.data;
+        // ID列表，用于验证ID重复
+        self._IDs = [];
+        (function (menus) {
+            function forEachIds (list) {
+                var that = arguments;
 
-        self.root = self.data.menus[0];
-        self.menuList = ko.observableArray(ko.mapping.fromJS(self.root.subMenu)());
+                ko.utils.arrayForEach(list, function (menu) {
+                    self._IDs.push(menu.menuId);
+                    if (menu.subMenu && menu.subMenu.length > 0) {
+                        that.callee(menu.subMenu);
+                    }
+                });
+            }
 
-        self.updateMenu = function () {
-            self.root.subMenu = ko.mapping.toJS(self.menuList);
+            forEachIds(menus);
+        }(self.data.menus));
+
+        // 菜单信息
+        self.menuList = ko.observableArray(ko.mapping.fromJS(self.data.menus)());
+
+        // 同步菜单函数
+        self.synchronous = function () {
+            var q = $.Deferred();
             Tools.ajax({
-                url: "/menus/update",
-                data: { menus: [self.root] },
-                success: function (returnData) {
+                url     : '/menus/update',
+                data    : {
+                    menus: ko.mapping.toJS(self.menuList)
+                },
+                success : function (returnData) {
                     console.log(returnData);
+                    if (returnData.success) {
+                        q.resolve();
+                    }
+                }
+            });
+            return q;
+        };
+
+        // 当前被选中的菜单数据
+        self.focusMenu = ko.observable(ko.mapping.fromJS({
+            menuId      : "",
+            menuName    : "",
+            desc        : "",
+            link        : "",
+            level       : "",
+            subMenu     : []
+        }));
+
+        self._focusMenuParent = ko.observable(false);
+        self.selectMenu = function (parent) {
+            self.focusMenu(this);
+            self._focusMenuParent(parent);
+        };
+
+        self.editMenu = function () {
+            self.palette({
+                name        : self.data.mapping.getJS("editMenu"),
+                template    : self.data.mapping.getTemp("editMenu"),
+                data        : { parent: self, data: self.data },
+                afterRender : function () {
+                    $('#wind').modal('show');
                 }
             });
         };
 
+        self.addSubMenu = function () {
+            self.palette({
+                name        : self.data.mapping.getJS("addSubMenu"),
+                template    : self.data.mapping.getTemp("addSubMenu"),
+                data        : { parent: self, data: self.data },
+                afterRender : function () {
+                    $('#wind').modal('show');
+                }
+            });
+        };
 
-        self.getNewNode = function () {
-            return ko.mapping.fromJS({
+        self.addDescMenu = function () {
+            self.palette({
+                name        : self.data.mapping.getJS('addDescMenu'),
+                template    : self.data.mapping.getTemp('addDescMenu'),
+                data        :{ parent: self, data: self.data },
+                afterRender : function () {
+                    $('#wind').modal('show');
+                }
+            });
+        };
+
+        self.addLine = function () {
+            self.focusMenu().subMenu = self.focusMenu().subMenu || ko.observableArray([]);
+            self.focusMenu().subMenu.push(ko.mapping.fromJS({
                 menuId      : "",
-                menuName    : "",
+                menuName    : "--------------------",
                 desc        : "",
                 link        : "",
                 level       : "",
                 subMenu     : []
-            });
-        };
-
-        self._focusMenu = ko.observable(self.getNewNode());
-        self.focusMenu = ko.observable(ko.utils.extend(self.getNewNode(), {
-            submenus: self.menuList
-        }))
-        self.focusMenuLevel = ko.observable(0);
-
-        self.backToRoot = function () {
-            self._focusMenu(self.getNewNode());
-            self.focusMenu(ko.utils.extend(self.getNewNode(), {
-                submenus: self.menuList
             }));
-            self.focusMenuLevel(0);
+            self.synchronous();
         };
 
-        self.editMenu = function (level) {
-            var newMenu = self.getNewNode();
-            newMenu.id(this.id());
-            newMenu.text(this.text());
-            newMenu.description(this.description());
-            newMenu.link(this.link() == "javascript:void(0);" ? "" : this.link());
-
-            self.focusMenu(this);
-            self._focusMenu(newMenu);
-            self.focusMenuLevel(level);
+        self.upMenu = function () {
+            var index = self.focusMenu().subMenu.indexOf(this);
+            self.focusMenu().subMenu.remove(this);
+            self.focusMenu().subMenu.splice(index - 1, 0, this);
+            self.synchronous();
         };
 
-        // 清空
-        self.reset = function () {
-            self._focusMenu(self.getNewNode());
+        self.downMenu = function () {
+            var index = self.focusMenu().subMenu.indexOf(this);
+            self.focusMenu().subMenu.remove(this);
+            self.focusMenu().subMenu.splice(index + 1, 0, this);
+            self.synchronous();
         };
 
-        self.isEmpty = function () {
-            return self._focusMenu().id() == "" && self._focusMenu().text() == "" &&self._focusMenu().description() == "" &&self._focusMenu().link() == "";
-        };
-
-        // 保存修改
-        self.saveChange = function () {
-            self.focusMenu().id(self._focusMenu().id());
-            self.focusMenu().text(self._focusMenu().text());
-            self.focusMenu().description(self._focusMenu().description());
-            self.focusMenu().link(self._focusMenu().link() == "" ? "javascript:void(0);" : self._focusMenu().link());
-            self._focusMenu(self.getNewNode());
-            self.focusMenu(self.getNewNode());
-        };
-
-        // 作为子菜单添加
-        self.addSubMenu = function () {
-            if (self.isEmpty()) {
-                $('.ui.basic.modal').modal('show')
-                return false;
-            }
-
-            if (!ko.isObservable(self.focusMenu().submenus)) {
-                self.focusMenu().submenus = ko.observableArray([]);
-            }
-            self.focusMenu().submenus.push(self._focusMenu());
-
-            self._focusMenu(self.getNewNode());
-        };
-
-        // 上移
-        self.move = function () {
-            var index = self.focusMenu().submenus().indexOf(this);
-            self.focusMenu().submenus.remove(this);
-            self.focusMenu().submenus.splice(index - 1, 0, this);
-        };
-
-        // 下移
-        self.down = function () {
-            var index = self.focusMenu().submenus().indexOf(this);
-            self.focusMenu().submenus.remove(this);
-            self.focusMenu().submenus.splice(index + 1, 0, this);
-        };
-
-        // 上加横线
-
-        // 下加横线
-
-        // 删除
         self.removeMenu = function () {
-            // 需要增加提示逻辑
-            self.focusMenu().submenus.remove(this);
+            if (confirm('确定要删除吗?')) {
+                self._focusMenuParent().subMenu.remove(self.focusMenu());
+                self.synchronous();
+            }
         };
 
-        self.parent.loading(false);
+        self.removeSubMenu = function () {
+            if (confirm('确定要删除吗？')) {
+                self.focusMenu().subMenu.remove(this);
+                self.synchronous();
+            }
+        };
 
         if (self.data.test) {
             main = self;

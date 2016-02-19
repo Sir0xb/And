@@ -23,6 +23,12 @@ apps = [
     "welcome"
 ]
 
+gulp.task "cleanLog", ->
+    gulp.src ["log/*.log"],
+        read    : no
+        force   : yes
+    .pipe clean()
+
 gulp.task "clean", ->
     gulp.src [
         "public/apps/#{appName}/rev-manifest.json"
@@ -90,7 +96,7 @@ gulp.task "browser-sync", ->
         port    : 3000
 
 gulp.task "default", ->
-    runSequence "clean", "js", "html", "browser-sync"
+    runSequence "cleanLog", "clean", "js", "html"
 
     gulp.watch [
         "public/apps/#{appName}/modules/**/*.js"
@@ -100,4 +106,3 @@ gulp.task "default", ->
     ], (->
         runSequence "clean", "js", "html"
     ) for appName in apps
-    # .on "change", browserSync.reload for appName in apps

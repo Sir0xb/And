@@ -1,11 +1,11 @@
 <div id="__message__" class="ui small modal">
     <i class="close icon"></i>
-    <div class="header" data-bind="value: msg.title"></div>
+    <div class="header" data-bind="text: msg.title"></div>
     <div class="image content">
         <div class="image">
             <i class="icon" data-bind="css: msg.type"></i>
         </div>
-        <div class="description" data-bind="value: msg.message"></div>
+        <div class="description" data-bind="text: msg.message"></div>
     </div>
     <div class="actions">
         <!-- ko foreach: msg.buttons -->
