@@ -1,126 +1,272 @@
-<pre><code class="code xml"><span class="tag">&lt;<span class="title">button</span> <span class="attribute">class</span>=<span class="value class">"ui <b title="Required Class">primary</b> button"</span>&gt;</span>
-  Save
-<span class="tag">&lt;/<span class="title">button</span>&gt;</span>
-<span class="tag">&lt;<span class="title">button</span> <span class="attribute">class</span>=<span class="value">"ui button"</span>&gt;</span>
-  Discard
-<span class="tag">&lt;/<span class="title">button</span>&gt;</span></code></pre>
+<h3 class="ui dividing header">koTextcutHandler</h3>
+<pre>
+<code class="code javascript">
+define(["knockout", "jquery"], function (ko, $) {
+    ko.bindingHandlers.textcut = {
+        init: function(element, valueAccessor){
+            var options = ko.utils.unwrapObservable(valueAccessor());
 
+            $(element).text(options.text.length > options.length ? options.text.substring(0, options.length) + "..." : options.text);
+        },
+        update: function(element, valueAccessor){
+            var options = ko.utils.unwrapObservable(valueAccessor());
 
+            $(element).text(options.text.length > options.length ? options.text.substring(0, options.length) + "..." : options.text);
+        }
+    }
+});
+</code>
+</pre>
+<div class="ui message">
+    <div class="header">原数据</div>
+    <div class="content" data-bind="text: text1"></div>
+</div>
+<pre>
+<code class="code javascript">
+data-bind="textcut: { text: string_value, length: 9 }"
+</code>
+</pre>
+<div class="ui message">
+    <div class="header">处理后</div>
+    <div class="content" data-bind="textcut: { text: text1, length: 9 }"></div>
+</div>
+
+<br><br>
+<h3 class="ui dividing header"></h3>
+<br><br>
+
+<h3 class="ui dividing header">koHoverHandler</h3>
 <style>
     .red { background-color: red; color: yellow; }
 </style>
-<form class="form-horizontal" style="width: 800px;">
-    <div class="form-group">
-        <h4 class="col-md-3 col-md-offset-2">
-            <a target="_blank" href="http://cdn-cc.17zuoye.cn/static/17cdn/ko-path/koTextcutHandler.js">koTextcutHandler</a>
-        </h4>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">原数据</label>
-        <div class="col-sm-10">
-            <div data-bind="text: text1"></div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">处理后</label>
-        <div class="col-sm-10">
-            <div data-bind="textcut: { text: text1, length: 9 }"></div>
-        </div>
-    </div>
+<pre>
+<code class="code javascript">
+define(["knockout", "jquery"], function (ko, $) {
+    ko.bindingHandlers.hover = {
+        init: function(element, valueAccessor){
+            $(element).hover(
+                function(){
+                    $(element).addClass(valueAccessor());
+                },
+                function(){
+                    $(element).removeClass(valueAccessor());
+                }
+            );
+        }
+    };
+});
+</code>
+</pre>
+<table class="ui celled table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr data-bind="hover: 'red'">
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr data-bind="hover: 'red'">
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr data-bind="hover: 'red'">
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+        </tr>
+    </tbody>
+</table>
 
-    <br>
+<br><br>
+<h3 class="ui dividing header"></h3>
+<br><br>
 
-    <div class="form-group">
-        <h4 class="col-md-3 col-md-offset-2">
-            <a target="_blank" href="http://cdn-cc.17zuoye.cn/static/17cdn/ko-path/koHoverHandler.js">koHoverHandler</a>
-        </h4>
-    </div>
-    <div class="form-group">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr data-bind="hover: 'red'">
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr data-bind="hover: 'red'">
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr data-bind="hover: 'red'">
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<h3 class="ui dividing header">beforeSubscribe</h3>
+<pre>
+<code class="code javascript">
+define(["knockout"], function (ko) {
+    ko.observable.fn.beforeSubscribe = function (callback, target) {
+        var _oldValue = null;
 
-    <br>
+        this.subscribe(function (oldValue) {
+            _oldValue = oldValue;
+        }, null, "beforeChange");
 
-    <div class="form-group">
-        <h4 class="col-md-3 col-md-offset-2">
-            <a target="_blank" href="/ko-path/beforeSubscribe.js">beforeSubscribe</a>
-        </h4>
+        this.subscribe(function (newValue) {
+            callback.call(target, newValue, _oldValue);
+        });
+    };
+});
+</code>
+</pre>
+<br>
+<br>
+<br>
+<pre>
+<code class="code javascript">
+var testValue = ko.observable("abc");
+testValue.subscribe(function (newValue, oldValue) {
+    console.log(newValue);
+    console.log(oldValue);
+});
+</code>
+</pre>
+<form class="ui form">
+    <div class="field">
+        <label>subscribe 效果</label>
+        <input type="text" data-bind="value: text2, valueUpdate: 'afterkeydown'">
     </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">加载前</label>
-        <div class="col-sm-10">
-            <div class="col-sm-10">
-                <input type="text" class="form-control" data-bind="value: text2, valueUpdate: 'afterkeydown'">
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">加载后</label>
-        <div class="col-sm-10">
-            <div class="col-sm-10">
-                <input type="text" class="form-control" data-bind="value: text3, valueUpdate: 'afterkeydown'">
-            </div>
-        </div>
-    </div>
+</form>
+<br>
+<br>
+<br>
+<pre>
+<code class="code javascript">
+var testValue = ko.observable("abc");
+testValue.beforeSubscribe(function (newValue, oldValue) {
+    console.log(newValue);
+    console.log(oldValue);
 
-    <br>
-
-    <div class="form-group">
-        <h4 class="col-md-3 col-md-offset-2">
-            <a target="_blank" href="/ko-path/onecBeforeSubscribe.js">onecBeforeSubscribe</a>
-        </h4>
+    if (oldValue == "1234") {
+        self.text3("1234");
+    }
+});
+</code>
+</pre>
+<form class="ui form">
+    <div class="field">
+        <label>beforeSubscribe 效果</label>
+        <input type="text" data-bind="value: text3, valueUpdate: 'afterkeydown'">
     </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">多次绑定的数据</label>
-        <div class="col-sm-10">
-            <div class="col-sm-10">
-                <input type="text" class="form-control" data-bind="value: text4, valueUpdate: 'afterkeydown'">
-            </div>
-        </div>
-    </div>
+</form>
 
-    <br>
+<br><br>
+<h3 class="ui dividing header"></h3>
+<br><br>
 
-    <div class="form-group">
-        <h4 class="col-md-3 col-md-offset-2">
-            <a target="_blank" href="/ko-path/onecBeforeSubscribe.js">onecSubscribe</a>
-        </h4>
+<h3 class="ui dividing header">onecBeforeSubscribe</h3>
+<pre>
+<code class="code javascript">
+define(["knockout"], function (ko) {
+    ko.observable.fn.onecBeforeSubscribe = function (callback, target) {
+        var self = this;
+
+        if (!self.isOnecBeforeSubscribe) {
+            var _oldValue = null;
+
+            this.subscribe(function (oldValue) {
+                _oldValue = oldValue;
+            }, null, "beforeChange");
+
+            this.subscribe(function (newValue) {
+                callback.call(target, newValue, _oldValue);
+            });
+
+            self.isOnecBeforeSubscribe = true;
+        }
+    };
+});
+</code>
+</pre>
+<br>
+<br>
+<br>
+<pre>
+<code class="code javascript">
+var testValue = ko.observable("abc");
+testValue.beforeSubscribe(function (newValue, oldValue) {
+    console.log("beforeSubscribe 第一次绑定");
+    console.log(newValue);
+    console.log(oldValue);
+});
+testValue.beforeSubscribe(function (newValue, oldValue) {
+    console.log("beforeSubscribe 第二次绑定");
+    console.log(newValue);
+    console.log(oldValue);
+});
+
+testValue.onecBeforeSubscribe(function (newValue, oldValue) {
+    console.log("onecBeforeSubscribe 第一次绑定");
+    console.log(newValue);
+    console.log(oldValue);
+});
+testValue.onecBeforeSubscribe(function (newValue, oldValue) {
+    console.log("onecBeforeSubscribe 第二次绑定");
+    console.log(newValue);
+    console.log(oldValue);
+});
+</code>
+</pre>
+<form class="ui form">
+    <div class="field">
+        <label>多次绑定效果对比</label>
+        <input type="text" data-bind="value: text4, valueUpdate: 'afterkeydown'">
     </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">多次绑定的数据</label>
-        <div class="col-sm-10">
-            <div class="col-sm-10">
-                <input type="text" class="form-control" data-bind="value: text5, valueUpdate: 'afterkeydown'">
-            </div>
-        </div>
+</form>
+
+<br><br>
+<h3 class="ui dividing header"></h3>
+<br><br>
+
+<h3 class="ui dividing header">onecSubscribe</h3>
+<pre>
+<code class="code javascript">
+define(["knockout"], function (ko) {
+    ko.observable.fn.onecBeforeSubscribe = function (callback, target) {
+        var self = this;
+
+        if (!self.isOnecBeforeSubscribe) {
+            var _oldValue = null;
+
+            this.subscribe(function (oldValue) {
+                _oldValue = oldValue;
+            }, null, "beforeChange");
+
+            this.subscribe(function (newValue) {
+                callback.call(target, newValue, _oldValue);
+            });
+
+            self.isOnecBeforeSubscribe = true;
+        }
+    };
+});
+</code>
+</pre>
+<br>
+<br>
+<br>
+<pre>
+<code class="code javascript">
+var testValue = ko.observable("abc");
+testValue.subscribe(function (newValue) {
+    console.log("subscribe 第一次绑定");
+    console.log(newValue);
+});
+testValue.subscribe(function (newValue) {
+    console.log("subscribe 第二次绑定");
+    console.log(newValue);
+});
+
+testValue.onecSubscribe(function (newValue) {
+    console.log("onecSubscribe 第一次绑定");
+    console.log(newValue);
+});
+testValue.onecSubscribe(function (newValue) {
+    console.log("onecSubscribe 第二次绑定");
+    console.log(newValue);
+});
+</code>
+</pre>
+<form class="ui form">
+    <div class="field">
+        <label>多次绑定效果对比</label>
+        <input type="text" data-bind="value: text5, valueUpdate: 'afterkeydown'">
     </div>
 </form>
