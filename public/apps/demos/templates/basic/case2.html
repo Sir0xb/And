@@ -1,72 +1,78 @@
-<h4 class="col-md-3 col-md-offset-1">原生数据生成表格</h4>
-<button data-bind="click: addItem1" class="btn btn-info btn-sm">添加内容</button>
-<table class="table">
-    <thead>
-        <tr>
-            <td>a字段</td>
-            <td>b字段</td>
-            <td>修改内容</td>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- ko foreach: list1 -->
-        <tr>
-            <td data-bind="text: a"></td>
-            <td data-bind="text: b"></td>
-            <td>
-                <button data-bind="click: $parent.changeContent1" class="btn btn-info btn-sm">修改内容</button>
-            </td>
-        </tr>
-        <!-- /ko -->
-    </tbody>
+<h3 class="ui dividing header">普通数组 ＋ 普通数据</h3>
+<table class="ui celled table">
+<thead>
+    <tr>
+        <th>Field A</th>
+        <th>Field B</th>
+        <th><button class="mini ui button" data-bind="click: addItem1"> 添加数据 </button></th>
+    </tr>
+</thead>
+<tbody>
+    <!-- ko foreach: list1 -->
+    <tr>
+        <td data-bind="text: a"></td>
+        <td data-bind="text: b"></td>
+        <td><button class="mini ui button" data-bind="click: $parent.changeContent1"> 修改数据 </button></td>
+    </tr>
+    <!-- /ko -->
+</tbody>
+<tfoot>
+    <tr>
+        <th colspan="3"> 无法感知添加事件和变更事件 </th>
+    </tr>
+</tfoot>
 </table>
 
-<br>
+<h3 class="ui dividing header"></h3>
 
-<h4 class="col-md-3 col-md-offset-1">Ko数组</h4>
-<button data-bind="click: addItem2" class="btn btn-info btn-sm">添加内容</button>
-<table class="table">
-    <thead>
-        <tr>
-            <td>a字段</td>
-            <td>b字段</td>
-            <td>修改内容</td>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- ko foreach: list2 -->
-        <tr>
-            <td data-bind="text: a"></td>
-            <td data-bind="text: b"></td>
-            <td>
-                <button data-bind="click: $parent.changeContent2" class="btn btn-info btn-sm">修改内容</button>
-            </td>
-        </tr>
-        <!-- /ko -->
-    </tbody>
+<h3 class="ui dividing header">ko 数组 ＋ 普通数据</h3>
+<table class="ui celled table">
+<thead>
+    <tr>
+        <th>Field A</th>
+        <th>Field B</th>
+        <th><button class="mini ui button" data-bind="click: addItem2"> 添加数据 </button></th>
+    </tr>
+</thead>
+<tbody>
+    <!-- ko foreach: list2 -->
+    <tr>
+        <td data-bind="text: a"></td>
+        <td data-bind="text: b"></td>
+        <td><button class="mini ui button" data-bind="click: $parent.changeContent2"> 修改数据 </button></td>
+    </tr>
+    <!-- /ko -->
+</tbody>
+<tfoot>
+    <tr>
+        <th colspan="3"> 只能感知添加事件，但不能感知变更事件 </th>
+    </tr>
+</tfoot>
 </table>
 
-<br>
+<h3 class="ui dividing header"></h3>
 
-<h4 class="col-md-3 col-md-offset-1">Ko数据</h4>
-<button data-bind="click: addItem3" class="btn btn-info btn-sm">添加内容</button>
-<table class="table">
-    <thead>
-        <tr>
-            <td>a字段</td>
-            <td>b字段</td>
-            <td>修改内容</td>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- ko foreach: list3 -->
-        <tr>
-            <td data-bind="text: a"></td>
-            <td data-bind="text: b"></td>
-            <td>
-                <button data-bind="click: $parent.changeContent3" class="btn btn-info btn-sm">修改内容</button>
-            </td>
-        </tr>
-        <!-- /ko -->
-    </tbody>
+<h3 class="ui dividing header">ko 数组 ＋ ko 数据</h3>
+<table class="ui celled table">
+<thead>
+    <tr>
+        <th>Field A</th>
+        <th>Field B</th>
+        <th><button class="mini ui button" data-bind="click: addItem3"> 添加数据 </button></th>
+    </tr>
+</thead>
+<tbody>
+    <!-- ko foreach: list3 -->
+    <tr>
+        <td data-bind="text: a"></td>
+        <td data-bind="text: b"></td>
+        <td><button class="mini ui button" data-bind="click: $parent.changeContent3"> 修改数据 </button></td>
+    </tr>
+    <!-- /ko -->
+</tbody>
+<tfoot>
+    <tr>
+        <th colspan="3"> 既能感知添加事件，还能感知变更事件 </th>
+    </tr>
+</tfoot>
 </table>

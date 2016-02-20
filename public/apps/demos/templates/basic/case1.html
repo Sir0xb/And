@@ -1,11 +1,11 @@
 <div class="ui styled fluid accordion">
-    <div class="active title">
+    <div class="title">
         <h3>
             <i class="dropdown icon"></i>
             普通数据 ko 方式展示到页面 (单向流)
         </h3>
     </div>
-    <div class="active content">
+    <div class="content">
         <div class="ui message">
             <div class="header">
                 数据内容
@@ -153,26 +153,53 @@
             </form>
         </div>
     </div>
-</div>
 
-<form class="form-horizontal" style="width: 800px;">
-
-    <div class="form-group">
-        <h4 class="col-md-3 col-md-offset-2">用函数获取</h4>
+    <div class="title">
+        <h3>
+            <i class="dropdown icon"></i>
+            其他数据来源
+        </h3>
     </div>
-    <div class="form-group">
-        <label class="col-sm-3 control-label" data-bind="text: text5()"></label>
-    </div>
+    <div class="content">
+        <div class="ui message">
+            <div class="header">
+                来自普通函数返回值(单向流)
+            </div>
+            <p data-bind="text: text5()"></p>
+        </div>
 
-    <br>
+        <div class="ui message">
+            <div class="header">
+                value 方式绑定到 input
+            </div>
+            <form class="ui form">
+                <div class="field">
+                    <label>&nbsp</label>
+                    <input type="text" data-bind="value: text5(), valueUpdate: 'keyup'">
+                </div>
+            </form>
+        </div>
 
-    <div class="form-group">
-        <h4 class="col-md-3 col-md-offset-2">合成值</h4>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">String6</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" data-bind="value: text6, valueUpdate: 'afterkeydown'">
+        <div class="ui message">
+            <div class="header">
+                来自两个 ko 对象
+            </div>
+            <label>数据1</label>
+            <p data-bind="text: text6_1"></p>
+            <label>数据2</label>
+            <p data-bind="text: text6_2"></p>
+        </div>
+
+        <div class="ui message">
+            <div class="header">
+                value 方式绑定到 input
+            </div>
+            <form class="ui form">
+                <div class="field">
+                    <label>&nbsp</label>
+                    <input type="text" data-bind="value: text6, valueUpdate: 'keyup'">
+                </div>
+            </form>
         </div>
     </div>
-</form>
+</div>

@@ -1,9 +1,6 @@
-define(["knockout", "ko-mapping"], function (ko) {
+define(["knockout", "Super", "ko-mapping"], function (ko, Super) {
     return function (context) {
-        var self = this;
-
-        self.parent = context.parent;
-        self.data = context.data;
+        var self = Super.call(this, context);
 
         // 原生数据
         self.list1 = [{
@@ -59,11 +56,9 @@ define(["knockout", "ko-mapping"], function (ko) {
             this.b(this.b() * 10);
         };
 
-        self.parent.loading(false);
-
         //测试接口
         if (self.parent.debug) {
-            case2 = self;             
+            case2 = self;
         }
     };
 });
