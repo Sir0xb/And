@@ -1,4 +1,15 @@
 <h3 class="ui dividing header">普通数组 ＋ 普通数据</h3>
+<pre>
+    <code class="code xml">
+    var list = [{
+        a: 1, b: 1
+    }, {
+        a: 2, b: 2
+    }, {
+        a: 3, b: 3
+    }];
+    </code>
+</pre>
 <table class="ui celled table">
 <thead>
     <tr>
@@ -26,6 +37,17 @@
 <h3 class="ui dividing header"></h3>
 
 <h3 class="ui dividing header">ko 数组 ＋ 普通数据</h3>
+<pre>
+    <code class="code xml">
+    var list = ko.observableArray([{
+        a: 1, b: 1
+    }, {
+        a: 2, b: 2
+    }, {
+        a: 3, b: 3
+    }]);
+    </code>
+</pre>
 <table class="ui celled table">
 <thead>
     <tr>
@@ -53,6 +75,21 @@
 <h3 class="ui dividing header"></h3>
 
 <h3 class="ui dividing header">ko 数组 ＋ ko 数据</h3>
+<pre>
+    <code class="code xml">
+    var list = ko.observableArray(
+        ko.mapping.fromJS(
+            [{
+                a: 1, b: 1
+            }, {
+                a: 2, b: 2
+            }, {
+                a: 3, b: 3
+            }]
+        )()
+    );
+    </code>
+</pre>
 <table class="ui celled table">
 <thead>
     <tr>
