@@ -5,6 +5,7 @@ var Demos = require("./Demos");
 var Login = require("./Login");
 var Signup = require("./Signup");
 var Menus = require("./Menus");
+var Users = require("./Users");
 
 module.exports = function (app) {
     app.get("/", function (req, res, next) {
@@ -26,4 +27,6 @@ module.exports = function (app) {
     Signup(app);
 
     Menus(app);
+
+    Users(app);
 };
