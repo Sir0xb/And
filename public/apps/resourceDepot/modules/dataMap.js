@@ -9,6 +9,19 @@ define(function(){
 	        	name: '移动端',
 	        	value: 2
 	        },
-        ]
+        ],
+        resource: {
+        	id: '',
+        	title: '',
+        	type: '',
+        	description: '',
+			useMethod: '',
+			demoUrls: [],
+			siteUrl: '',
+			owner: '',
+			ownerQQ: '',
+			comment: '',
+			versionPackage: []
+        }
 	}
 });

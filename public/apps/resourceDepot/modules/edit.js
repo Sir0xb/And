@@ -1,4 +1,4 @@
-define(['knockout', 'Tools', 'uploader', 'marked', 'hljs', '../../../lib/YQuploader-1.0/skins/default/tpl', './dataMap', 'css!../../../lib/YQuploader-1.0/skins/default/style', 'css!../../../lib/highlight/styles/monokai-sublime', 'ko-mapping'], function(ko, $tools, YQuploader, marked, highlight, skin, dataMap){
+define(['knockout', 'Tools', 'uploader', 'marked', 'hljs', '../../../lib/YQuploader-1.0/skins/default/tpl', './dataMap', 'sweetalert', 'css!../../../lib/YQuploader-1.0/skins/default/style', 'css!../../../lib/highlight/styles/monokai-sublime', 'css!../../../lib/sweetalert/sweetalert.css', 'ko-mapping'], function(ko, $tools, YQuploader, marked, highlight, skin, dataMap, swal){
 	return function (context) {
 		var self = this;
 
@@ -22,12 +22,29 @@ define(['knockout', 'Tools', 'uploader', 'marked', 'hljs', '../../../lib/YQuploa
         		url: '/resourceDepot/save',
         		data: {resource: sdata},
         		success: function(data){
-        			
+                    swal({
+                        title: '保存成功！',
+                        type: 'success',
+                        timer: 2000
+                    });
+        			swal("保存成功！", "", "success")
         		}
         	});
         }
 
-        $('body').on('add_page_ready', function(){
+        $('body').on('edit_page_ready', function(){
+            //如果有id，则是编辑进来的，初始化数据
+            if(self.data.itemId){
+                $tools.ajax({
+                    url: '/resourceDepot/get',
+                    data: {id: self.data.itemId},
+                    success: function(data){
+                        ko.mapping.fromJS(data.data, self.formData);
+                    }
+                });
+            }
+
+
         	//初始化上传控件
 	        var uploader = new YQuploader({
 				server: '/upload',
@@ -49,19 +66,7 @@ define(['knockout', 'Tools', 'uploader', 'marked', 'hljs', '../../../lib/YQuploa
 			});
         });
 
-        self.formData = {
-        	id: ko.observable(''),
-        	title: ko.observable(''),
-        	type: ko.observable(''),
-        	description: ko.observable(''),
-			useMethod: ko.observable(''),
-			demoUrls: ko.observableArray([]),
-			siteUrl: ko.observable(''),
-			owner: ko.observable(''),
-			ownerQQ: ko.observable(''),
-			comment: ko.observable(''),
-			versionPackage: ko.observableArray([{version: ko.observable(''), files: ko.observableArray([{name: ko.observable(''), devUrl: ko.observable(''), cdn: ko.observable('')}])}])
-        };
+        self.formData = ko.mapping.fromJS(dataMap.resource);
 
         marked.setOptions({
 			highlight: function (code, lang, callback) {
@@ -74,7 +79,7 @@ define(['knockout', 'Tools', 'uploader', 'marked', 'hljs', '../../../lib/YQuploa
         });
 
         //debug
-        window.add = self;
+        window.edit = self;
 
 
 	};

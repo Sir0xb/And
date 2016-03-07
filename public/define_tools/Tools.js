@@ -1,4 +1,4 @@
-define([], function () {
+define(['sweetalert'], function (sweetalert) {
     var version = "0.0.3";
 
     var Tools = {};

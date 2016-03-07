@@ -27,6 +27,10 @@ define(['knockout', 'sammy'], function(ko, Sammy){
                 });
                 self.parent.loading(true);
             });
+
+            this.get('/resourceDepot', function(){
+                this.app.runRoute('get', '#/list')
+            })
         });
         
         Sammy().run();

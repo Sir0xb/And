@@ -14,6 +14,7 @@ require.config({
         "uploader"              : "lib/YQuploader-1.0/YQuploader",
         "marked"                : "lib/marked/marked.min",
         "hljs"                  : "lib/highlight/highlight.min",
+        "sweetalert"            : "lib/sweetalert/sweetalert.min",
 
         "ko-textcut"            : "ko-path/koTextcutHandler",
         "ko-hover"              : "ko-path/koHoverHandler",

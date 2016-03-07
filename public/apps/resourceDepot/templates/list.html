@@ -1,7 +1,7 @@
 <div class="ui grid">
 	<div class="row">
 		<div class="column right aligned">
-			<a href="#/add" class="ui button green">添加</a>
+			<a href="#/edit" class="ui button green">添加</a>
 		</div>
 	</div>
 	<!-- ko foreach: typeList -->
@@ -9,7 +9,7 @@
 		<h2 data-bind="text: name"></h2>
 		<div class="ui cards three" data-bind="foreach: $parent.dataList">
 			<!-- ko if: type==$parent.value -->
-			<div class="card grey">
+			<div class="card grey honeydew">
 				<div class="content">
 					<a class="header" data-bind="text: title, attr: {href: '#/detail/'+id}"></a>
 					<div class="meta" data-bind="text: lastModified">
@@ -17,9 +17,9 @@
 					<p data-bind="text: description"></p>
 				</div>
 				<div class="extra content">
-					<div class="ui two buttons">
-						<div class="ui basic green button">编辑</div>
-						<div class="ui basic red button">删除</div>
+					<div class="ui labels textr">
+						<a class="ui label teal" data-bind="attr: {href: '#/edit/'+id}">编辑</a>
+						<a class="ui label grey" href="javascript:void(0);" data-bind="click: $parents[1].remove">删除</a>
 					</div>
 			    </div>
 			</div>

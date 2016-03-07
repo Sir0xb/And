@@ -11,16 +11,33 @@ module.exports = function(app) {
     app.post("/resourceDepot/save", function(req, res, next){
     	var resource = req.body.resource;
 
-        Tools.log("Resource", "post", "resource/save", "添加资源");
+        //有id则为编辑更新
+        if(resource.id){
+            Tools.log("Resource", "post", "resource/save", "更新资源");
 
-    	ResourceDao.save(resource, function(err, data){
-    		if(err){
-				res.send({success: false, error: err});
-			}
-			else{
-				res.send({success: true, data: data});
-			}
-    	});
+            ResourceDao.updateById(resource, function(err, data){
+                if(err){
+                    res.send({success: false, error: err});
+                }
+                else{
+                    res.send({success: true, data: data});
+                }
+            });
+        }
+        else{
+            Tools.log("Resource", "post", "resource/save", "添加资源");
+
+            ResourceDao.save(resource, function(err, data){
+                if(err){
+                    res.send({success: false, error: err});
+                }
+                else{
+                    res.send({success: true, data: data});
+                }
+            });
+        }
+
+        
     });
 
     app.post("/resourceDepot/list", function(req, res, next){
@@ -43,6 +60,19 @@ module.exports = function(app) {
         Tools.log("Resource", "post", "resource/get", "获取资源");
 
         ResourceDao.findById(id, function(err, data){
+            if(err){
+                res.send({success: false, error: err});
+            }
+            else{
+                res.send({success: true, data: data});
+            }
+        });
+    });
+
+    app.post("/resourceDepot/remove", function(req, res, next){
+        var id = req.body.id;
+        Tools.log("Resource", "post", "resource/remove", "删除资源");
+        ResourceDao.remove(id, function(err, data){
             if(err){
                 res.send({success: false, error: err});
             }

@@ -245,3 +245,15 @@ body {
 .fr{
     float: right;
 }
+.honeydew{
+    background-color: honeydew !important;
+}
+.clearfix{
+    clear: both;
+}
+.textr{
+    text-align: right;
+}
+.lh24{
+    line-height: 24px;
+}

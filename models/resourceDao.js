@@ -46,7 +46,9 @@ ResourceSchema.pre('save', function(next) {
         next();
     });
 });
+
 ResourceSchema.set('toObject', { getters: true });
+
 
 var ResourceDao = function () {};
 
@@ -58,8 +60,11 @@ ResourceDao.prototype.save = function (obj, callback) {
     });
 };
 
-ResourceDao.prototype.updateById = function (menuId, callback) {
-    Resource.update({ menuId: menuId }, function (err) {
+ResourceDao.prototype.updateById = function (obj, callback) {
+    var instance = new Resource(obj);
+    instance.set('lastModified', moment().format('YYYY-MM-DD hh:mm:ss'));
+    console.log(instance)
+    instance.update(instance, function (err) {
         callback(err);
     });
 };
@@ -73,6 +78,12 @@ ResourceDao.prototype.findById = function (id, callback) {
 ResourceDao.prototype.list = function (callback) {
     Resource.find({}, function (err, obj) {
         callback(err, obj);
+    });
+}
+
+ResourceDao.prototype.remove = function(id, callback){
+    Resource.remove({id: id}, function(err){
+        callback(err, null);
     });
 }
 
