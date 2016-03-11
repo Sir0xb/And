@@ -1,9 +1,11 @@
 (function() {
-  var apps, browserSync, clean, concat, gulp, htmlmin, jshint, path, plumber, rename, rev, runSequence, uglify;
+  var apps, browserSync, clean, concat, es6Apps, es6transpiler, gulp, htmlmin, jshint, path, plumber, rename, rev, runSequence, uglify;
 
   path = require("path");
 
   gulp = require("gulp");
+
+  es6transpiler = require("gulp-es6-transpiler");
 
   browserSync = require("browser-sync").create();
 
@@ -24,6 +26,8 @@
   clean = require("gulp-clean");
 
   rev = require("gulp-rev");
+
+  es6Apps = ["es6apps"];
 
   apps = ["demos", "login", "menus", "signup", "test", "users", "welcome"];
 
@@ -60,7 +64,25 @@
     return results;
   });
 
-  gulp.task("js", ["clean:js"], function() {
+  gulp.task("es6", ["clean:js"], function() {
+    var appName, i, len, results;
+    results = [];
+    for (i = 0, len = es6Apps.length; i < len; i++) {
+      appName = es6Apps[i];
+      results.push(gulp.src(["public/apps/" + appName + "/modules/**/*.js", "!public/apps/" + appName + "/modules/**/*.min.js"]).pipe(plumber()).pipe(es6transpiler()).pipe(jshint()).pipe(rename({
+        extname: ".min.js"
+      })).pipe(uglify({
+        managle: false
+      })).pipe(rev()).pipe(gulp.dest("public/apps/" + appName + "/modules/")).pipe(rev.manifest({
+        path: path.join(__dirname, "public/apps/" + appName + "/rev-manifest.json"),
+        cwd: path.join(__dirname, "public/apps/" + appName + "/"),
+        merge: true
+      })).pipe(gulp.dest("public/apps/" + appName + "/")));
+    }
+    return results;
+  });
+
+  gulp.task("js", function() {
     var appName, i, len, results;
     results = [];
     for (i = 0, len = apps.length; i < len; i++) {
@@ -127,12 +149,12 @@
 
   gulp.task("default", function() {
     var appName, i, len, results;
-    runSequence("cleanLog", "clean", "js", "html");
+    runSequence("cleanLog", "clean", "es6", "js", "html");
     results = [];
     for (i = 0, len = apps.length; i < len; i++) {
       appName = apps[i];
       results.push(gulp.watch(["public/apps/" + appName + "/modules/**/*.js", "!public/apps/" + appName + "/modules/**/*.min.js", "public/apps/" + appName + "/templates/**/*.html", "!public/apps/" + appName + "/templates/**/*.tmpl.html"], (function() {
-        return runSequence("clean", "js", "html");
+        return runSequence("clean", "es6", "js", "html");
       })));
     }
     return results;
