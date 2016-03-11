@@ -1,0 +1,98 @@
+<div class="ui grid mb20">
+	<div class="column twelve wide">
+		<div class="ui form  mt20">
+			<div class="inline field">
+				<label>资源名称：</label>
+				<input class="w80" type="text" data-bind="value: formData.title">	
+			</div>
+			<div class="inline field">
+				<label>类别：</label>
+				<select class="w80" data-bind="options: types, optionsValue: 'value', optionsText: 'name', value: formData.type"></select>
+			</div>
+			<div class="inline field">
+				<label class="vat">demo：</label>
+				<div class="dib">
+					<!-- <ul class="ui list dib vat" data-bind="foreach: formData.demoUrls">
+						<li class="item">
+							<span data-bind="text: $data"></span>
+							<i class="icon remove red dib" title="删除"></i>
+						</li>
+					</ul> -->
+					<div id="upload_container"></div>
+				</div>
+			</div>
+			<div class="inline field">
+				<label>官网地址：</label>
+				<input class="w80" type="text" data-bind="value: formData.siteUrl">
+			</div>
+			<div class="inline field">
+				<label>维护者：</label>
+				<input class="w80" type="text" data-bind="value: formData.owner">
+			</div>
+			<div class="inline field">
+				<label>维护者QQ：</label>
+				<input class="w80" type="text" data-bind="value: formData.ownerQQ">
+			</div>
+			<div class="inline field">
+				<label>简介：</label>
+				<textarea class="w80" data-bind="value: formData.description"></textarea>
+			</div>
+			<div class="inline field">
+				<label class="vat">版本信息：</label>
+				<div class="dib">
+					<div class="ui cards" data-bind="foreach: formData.versionPackage" style="width: 520px;">
+						<div class="card" style="width:500px;">
+							<div class="content">
+								<div class="ui form">
+									<div class="inline field">
+										<label>版本号：</label>
+										<input class="w300" type="text" data-bind="value: version">
+									</div>
+									<div class="inline field">
+										<label class="vat">文件：</label>
+										<div class="dib" style="width:300px;">
+											<div class="ui list" data-bind="foreach: files">
+												<div class="item">
+													<input class="w300" type="text" placeholder="文件名称" data-bind="value: name">
+													<input class="w300" type="text" placeholder="相对路径" data-bind="value: devUrl">
+													<input class="w300 mb20" type="text" placeholder="cdn地址" data-bind="value: cdn">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="ui bottom attached button" data-bind="click: $parent.addFile">
+								<i class="add icon"></i>新增文件
+							</div>
+						</div>
+					</div>
+
+					<div>
+						<button class="ui button green mt20" data-bind="click: addVersion">新增版本</button>	
+					</div>
+				</div>
+			</div>
+			<div class="inline field">
+				<label>使用方法：</label>
+				<textarea class="w80" data-bind="value: formData.useMethod, valueUpdate: 'keyup'" placeholder="用markdown书写"></textarea>
+			</div>
+			<div class="inline field">
+				<label>备注：</label>
+				<textarea class="w80" data-bind="value: formData.comment"></textarea>
+			</div>
+			<div class="inline field">
+				<label>&nbsp;</label>
+				<button class="ui button blue" type="submit" data-bind="click: submit">Submit</button>
+			</div>
+			
+		</div>
+	</div>
+
+	<div class="column four wide">
+		<div style="position: fixed; width: 300px;">
+			<h3>使用方法</h3>
+			<div data-bind="html: parsedUseMethod" style="max-height: 600px;overflow: auto;"></div>
+		</div>
+	</div>
+</div>

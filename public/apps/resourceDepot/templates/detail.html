@@ -1,0 +1,56 @@
+<!-- ko with: resource -->
+
+	<h1 data-bind="text: title" class="fl"></h1>
+	<span class="ui teal tag label fl mt10 ml50" data-bind="text: typeName"></span>
+	<div class="ui grid clearfix">
+		<div class="column ten wide">
+			<h4>简介：</h4>
+			<p data-bind="text: description"></p>
+
+			<h4>使用方法：</h4>
+			<div data-bind="html: useMethod"></div>
+
+			<h4>备注：</h4>
+			<div data-bind="text: comment"></div>
+		</div>
+		<div class="column six wide">
+			<div class="row" data-bind="foreach: demoUrls">
+				<a class="ui orange label large" target="_blank" data-bind="attr: {href: $data}, text: 'demo'+($index()+1)"></a>
+			</div>
+			<div class="row mt20">
+				<b>官网：</b>
+				<a data-bind="attr: {href: siteUrl}, text: siteUrl" target="_blank"></a>
+			</div>
+			<div class="row mt20">
+				<b>版本信息：</b>
+				<!-- ko foreach: versionPackage -->
+				<div class="ui raised segment">
+					<div data-bind="text: version"></div>
+					<!-- ko foreach: files -->
+						<div class="mt10 lh24">
+							<div>
+								<b>文件名：</b>
+								<span data-bind="text: name"></span>
+							</div>
+							<div>
+								<b>相对路径：</b>
+								<span data-bind="text: devUrl"></span>
+							</div>
+							<div>
+								<b>CDN：</b>
+								<a target="_blank" data-bind="text: cdn, attr: {href: cdn}"></a>
+							</div>
+						</div>
+					<!-- /ko -->
+				</div>
+				<!-- /ko -->
+			</div>
+			<div class="mt20">
+				<b>维护者：</b>
+				<span data-bind="text: owner"></span>
+				<b class="ml20">QQ：</b>
+				<span data-bind="text: ownerQQ"></span>
+			</div>
+		</div>
+	</div>
+<!-- /ko -->

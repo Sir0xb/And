@@ -205,3 +205,55 @@ body {
         transform: translate(0, 0);
     }
 }
+
+.mt10{
+    margin-top: 10px !important;
+}
+.mt20{
+    margin-top: 20px !important;
+}
+.ml20{
+    margin-left: 20px !important;
+}
+.ml50{
+    margin-left: 50px !important;
+}
+.mb20{
+    margin-bottom: 20px !important;
+}
+.w50{
+    width: 50% !important;
+}
+.w80{
+    width: 80% !important;
+}
+.w300{
+    width: 300px !important;
+}
+.dib{
+    display: inline-block !important;
+}
+.vat{
+    vertical-align: top !important;
+}
+.p20{
+    padding: 20px;
+}
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.honeydew{
+    background-color: honeydew !important;
+}
+.clearfix{
+    clear: both;
+}
+.textr{
+    text-align: right;
+}
+.lh24{
+    line-height: 24px;
+}

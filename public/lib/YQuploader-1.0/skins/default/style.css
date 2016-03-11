@@ -1,0 +1,93 @@
+.uploader_skin_default {
+	position: relative;
+	font-family: "Microsoft Yahei";
+}
+.webuploader-element-invisible {
+	position: absolute !important;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px,1px,1px,1px);
+}
+.webuploader-pick {
+	position: relative;
+	color: #fff;
+	border: 1px solid #d53f10;
+	display: inline-block;
+	text-decoration: none;
+	width: 70px;
+	padding: 10px 0;
+	text-align: center;
+	font: 14px/1.125 "微软雅黑", "Microsoft YaHei", Arial;
+	vertical-align: middle;
+	border-radius: 3px;
+	background-color: #f86638;
+}
+.webuploader-pick-hover {
+	color: #fff;
+	background-color: #ff8260;
+}
+.webuploader-pick-disable {
+	opacity: 0.6;
+	pointer-events:none;
+}
+.uploader_btn{
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	vertical-align: middle;
+}
+.uploader_filename{
+	font-size: 14px;
+	color: #4e5656;
+	margin-bottom: 10px;
+}
+.uploader_progress{
+	width: 250px;
+	height: 8px;
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	vertical-align: middle;
+	overflow: hidden;
+	border-radius: 2px;
+	background-color: #E6E6E6;
+}
+.uploader_progress_bar{
+	background-color: #83D850;
+    height: 100%;
+}
+.uploader_progress_text{
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+    margin-left: 8px;
+    font-size: 12px;
+    color: #4e5656;
+    font-family: Tahoma;
+}
+.uploader_valid_error{
+	display: inline-block;
+    *display: inline;
+	*zoom: 1;
+    margin-left: 10px;
+    font-size: 14px;
+    color: #F00;
+}
+.uploader_info_error{
+	font-size: 14px;
+	color: #4e5656;
+	padding-left: 17px;
+	background: url(img/error.png) left top no-repeat;
+}
+.uploader_reupload:link, .uploader_reupload:visited{
+	color: #189cfb;
+	text-decoration: none;
+}
+.uploader_reupload:hover{
+	text-decoration: underline;
+}
+.uploader_tips{
+	margin-top: 30px;
+}
+.uploader_list{
+	text-align: left;
+}

@@ -6,6 +6,8 @@ var Login = require("./Login");
 var Signup = require("./Signup");
 var Menus = require("./Menus");
 var Users = require("./Users");
+var ResourceDepot = require("./ResourceDepot");
+var Upload = require("./Upload");
 
 module.exports = function (app) {
     app.get("/", function (req, res, next) {
@@ -29,4 +31,7 @@ module.exports = function (app) {
     Menus(app);
 
     Users(app);
+    ResourceDepot(app);
+
+    Upload(app);
 };
