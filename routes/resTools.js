@@ -22,6 +22,7 @@ function pageJump(req, res, next, path, title, appName, params) {
             message : message,
             title   : req.query.unitTest ? "接口测试" : title,
             appName : appName,
+            compress: ['localhost', '127.0.0.1'].indexOf(req.hostname) != -1 ? false : true,
             showTest: !!req.query.unitTest,
             params  : params
         });

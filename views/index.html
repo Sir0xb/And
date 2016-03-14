@@ -38,7 +38,7 @@
     <%- include viewport/modals.html %>
     <!-- /弹窗 -->
     <script type="text/javascript">
-        require(["knockout", "Tools", "Super", "json!apps/<%= appName %>/rev-manifest.json", "jquery", "ko-amd"], function (ko, Tools, Super, mapping, $) {
+        require(["knockout", "Tools", "Super"<% if(params.compress){ %>, "json!apps/<%= appName %>/rev-manifest.json"<% } %>, "jquery", "ko-amd"], function (ko, Tools, Super<% if(params.compress){ %>, mapping<% } %>, $) {
             <% if(message.success || message.warning || message.error){ %>
             $('.message .close').on('click', function() {
                 $(this).closest('.message').transition('pulse').transition('fade');
@@ -49,31 +49,15 @@
             ko.bindingHandlers.module.baseDir = "apps/<%= appName %>/modules";
             ko.amdTemplateEngine.defaultPath = "apps/<%= appName %>/templates";
 
-            //判断当前环境：dev, test, product
-            (function(location){
-                var env;
-                switch(location.hostname){
-                    case '127.0.0.1' :
-                    case 'localhost' :
-                        env = 'dev';
-                        params.test = true;
-                    break;
-                    default:
-                        env = 'dev';
-                    break;
-                }
-                params.env = env; //暴漏到params
-            })(window.location);
-
-            if(params.env=='dev'){
-                ko.amdTemplateEngine.defaultSuffix = '.html'; //本地环境使用.html模板
-                params.mapping         = mapping;
-                params.mapping.getJS   = function (key) {return key}
-                params.mapping.getTemp = function (key) {return key}
-            } else {
+            if(params.compress){
                 params.mapping          = mapping;
                 params.mapping.getJS    = Tools.getMappingFunc('.min.js', 3);
                 params.mapping.getTemp  = Tools.getMappingFunc('.tmpl.html', 10);
+            } else {
+                ko.amdTemplateEngine.defaultSuffix = '.html';
+                params.mapping         = {};
+                params.mapping.getJS   = function (key) {return key}
+                params.mapping.getTemp = function (key) {return key}
             }
 
             var self = Super.call({}, { parent: {}, data: params });

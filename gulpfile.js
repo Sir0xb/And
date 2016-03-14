@@ -29,7 +29,7 @@
 
   es6Apps = ["es6apps"];
 
-  apps = ["demos", "login", "menus", "signup", "test", "users", "welcome"];
+  apps = ["demos", "login", "menus", "resourceDepot", "signup", "test", "users", "welcome"];
 
   gulp.task("cleanLog", function() {
     return gulp.src(["log/*.log"], {

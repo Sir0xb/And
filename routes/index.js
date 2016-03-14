@@ -26,13 +26,13 @@ module.exports = function (app) {
 
     Login(app);
 
-    Signup(app);
-
     Menus(app);
-
-    Users(app);
 
     ResourceDepot(app);
 
+    Signup(app);
+
     Upload(app);
+
+    Users(app);
 };

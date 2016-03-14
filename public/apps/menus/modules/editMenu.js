@@ -24,7 +24,7 @@ define(["knockout", "Super", "ko-mapping", "ko-validation"], function (ko, Super
                 message : '请填写应用地址'
             },
             pattern: {
-                params  : /^\/[A-Za-z0-9]/,
+                params  : /^\/[A-Za-z0-9]{0,}/,
                 message : '应用地址格式错误( /xxxxx )'
             }
         });

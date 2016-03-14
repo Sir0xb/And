@@ -25,6 +25,7 @@ apps = [
     "demos"
     "login"
     "menus"
+    "resourceDepot"
     "signup"
     "test"
     "users"
