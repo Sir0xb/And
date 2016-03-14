@@ -10,6 +10,8 @@ var ResourceDepot = require("./ResourceDepot");
 var Upload = require("./Upload");
 
 module.exports = function (app) {
+    Customs(app);
+
     app.get("/", function (req, res, next) {
         if (req.session.user) {
             Tools.log('Route', 'get', '', '登录用户', 'welcome');
@@ -20,8 +22,6 @@ module.exports = function (app) {
         }
     });
 
-    Customs(app);
-
     Demos(app);
 
     Login(app);
@@ -31,6 +31,7 @@ module.exports = function (app) {
     Menus(app);
 
     Users(app);
+
     ResourceDepot(app);
 
     Upload(app);

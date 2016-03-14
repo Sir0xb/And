@@ -38,7 +38,7 @@ module.exports = function(app) {
             if (err || !obj) {
                 res.json({
                     success: false,
-                    message: '同步菜单错误，请联系管理员!11'
+                    message: '同步菜单错误，请联系管理员!'
                 });
             } else {
                 MenuDao.updateById(menuId, rootMenu, function (err) {

@@ -67,11 +67,10 @@
 
             if(params.env=='dev'){
                 ko.amdTemplateEngine.defaultSuffix = '.html'; //本地环境使用.html模板
-                params.mapping          = mapping;
-                params.mapping.getJS = function (key) {return key}
+                params.mapping         = mapping;
+                params.mapping.getJS   = function (key) {return key}
                 params.mapping.getTemp = function (key) {return key}
-            }
-            else{
+            } else {
                 params.mapping          = mapping;
                 params.mapping.getJS    = Tools.getMappingFunc('.min.js', 3);
                 params.mapping.getTemp  = Tools.getMappingFunc('.tmpl.html', 10);
