@@ -3,11 +3,11 @@ var fs = require('fs');
 var path = require('path');
 
 module.exports = function(app) {
-    
+
     app.post("/upload", function (req, res, next) {
     	var form = new formidable.IncomingForm();
 	    form.uploadDir = path.resolve(__dirname, '..', 'public/tmp'); //文件保存的临时目录为当前项目下的tmp文件夹
-	    form.maxFieldsSize = 100 * 1024 * 1024;  //用户头像大小限制为最大100M  
+	    form.maxFieldsSize = 100 * 1024 * 1024;  //用户头像大小限制为最大100M
 	    form.keepExtensions = true;        //使用文件的原扩展名
 	    form.parse(req, function (err, fields, file) {
 	        var filePath = '';
@@ -28,7 +28,7 @@ module.exports = function(app) {
 	            fs.mkdir(targetDir);
 	        }
 	        var fileExt = filePath.substring(filePath.lastIndexOf('.'));
-	        
+
             //以当前时间戳对上传文件进行重命名
             var fileName = new Date().getTime() + fileExt;
             var targetFile = path.join(targetDir, fileName);
@@ -43,7 +43,7 @@ module.exports = function(app) {
                     res.json({success: true, message: {name: fileName, url: fileUrl} });
                 }
             });
-	        
+
 	    });
 
     });
