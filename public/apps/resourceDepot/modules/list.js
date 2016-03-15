@@ -33,7 +33,5 @@ define(['knockout', 'Tools', './dataMap', 'ko-mapping'], function(ko, $tools, da
 
         //debug
         window.list = self;
-
-
 	};
 });

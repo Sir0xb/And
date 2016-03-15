@@ -1,13 +1,17 @@
 var Tools = require("./resTools");
 
 var Customs = require("./Customs");
+var Demos = require("./Demos");
 var Login = require("./Login");
 var Signup = require("./Signup");
 var Menus = require("./Menus");
+var Users = require("./Users");
 var ResourceDepot = require("./ResourceDepot");
 var Upload = require("./Upload");
 
 module.exports = function (app) {
+    Customs(app);
+
     app.get("/", function (req, res, next) {
         if (req.session.user) {
             Tools.log('Route', 'get', '', '登录用户', 'welcome');
@@ -18,15 +22,17 @@ module.exports = function (app) {
         }
     });
 
-    Customs(app);
+    Demos(app);
 
     Login(app);
-
-    Signup(app);
 
     Menus(app);
 
     ResourceDepot(app);
 
+    Signup(app);
+
     Upload(app);
+
+    Users(app);
 };

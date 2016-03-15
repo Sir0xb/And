@@ -1,4 +1,4 @@
 node_modules/
-*.tmpl.html
 
-rev-manifest.json
+*.log
+

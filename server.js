@@ -4,12 +4,23 @@ var cookie = require("cookie-parser");
 var parser = require("body-parser");
 var session = require("express-session");
 
+var FileStreamRotator = require('file-stream-rotator');
 var MongoStore = require("connect-mongo")(session);
+var morgan = require('morgan');
 var flash = require("connect-flash");
 var ejs = require("ejs");
+var fs = require('fs');
 
 var Config = require("./config/config");
 var routes = require("./routes");
+
+var logDirectory = __dirname + '/log';
+fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
+var accessLogStream = FileStreamRotator.getStream({
+  filename  : logDirectory + '/access-%DATE%.log',
+  frequency : 'daily',
+  verbose   : false
+});
 
 var app = express();
 
@@ -35,6 +46,7 @@ app.use(session({
         db  : Config.mongoInfo.db
     })
 }));
+app.use(morgan('combined', {stream: accessLogStream}));
 
 app.listen(app.get("port"), function () {
     return console.log("测试服务器启动，服务端口 " + (app.get("port")));

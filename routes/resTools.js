@@ -1,4 +1,6 @@
 function pageJump(req, res, next, path, title, appName, params) {
+    var MenuDao = require("../models/menuDao");
+
     var success = req.flash("success");
     var warning = req.flash("warning");
     var error   = req.flash("error");
@@ -13,13 +15,17 @@ function pageJump(req, res, next, path, title, appName, params) {
     params = params || {};
     params.test = true;
 
-    res.render(req.query.unitTest ? "viewport/unitTest.html" : path, {
-        user    : req.session.user,
-        message : message,
-        title   : req.query.unitTest ? "接口测试" : title,
-        appName : appName,
-        showTest: !!req.query.unitTest,
-        params  : params
+    MenuDao.findAll(function (err, obj) {
+        res.render(req.query.unitTest ? "viewport/unitTest.html" : path, {
+            user    : req.session.user,
+            menus   : obj[0].subMenu || [],
+            message : message,
+            title   : req.query.unitTest ? "接口测试" : title,
+            appName : appName,
+            compress: ['localhost', '127.0.0.1'].indexOf(req.hostname) != -1 ? false : true,
+            showTest: !!req.query.unitTest,
+            params  : params
+        });
     });
 }
 
