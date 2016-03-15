@@ -8,7 +8,7 @@
 	<div class="column sixteen wide resourcelist">
 		<h2 data-bind="text: name"></h2>
 		<div class="ui cards three" data-bind="foreach: $parent.dataList">
-			<!-- ko if: type==$parent.value -->
+			<!-- ko if: !removed && type==$parent.value -->
 			<div class="card grey honeydew">
 				<div class="content">
 					<a class="header" data-bind="text: title, attr: {href: '#/detail/'+id}"></a>

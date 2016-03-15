@@ -64,7 +64,7 @@ ResourceDao.prototype.save = function (obj, callback) {
 ResourceDao.prototype.updateById = function (obj, callback) {
     var instance = new Resource(obj);
     instance.set('lastModified', moment().format('YYYY-MM-DD hh:mm:ss'));
-    console.log(instance)
+
     instance.update(instance, function (err) {
         callback(err);
     });
@@ -83,9 +83,12 @@ ResourceDao.prototype.list = function (callback) {
 }
 
 ResourceDao.prototype.remove = function(id, callback){
-    Resource.remove({id: id}, function(err){
+    /*Resource.remove({id: id}, function(err){
         callback(err, null);
-    });
+    });*/
+    Resource.findOneAndUpdate({id: id}, {removed: true}, function(err){
+        callback(err, null);
+    })
 }
 
 module.exports = new ResourceDao();
