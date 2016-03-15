@@ -25,7 +25,8 @@ var ResourceSchema = new Schema({
                 }
             ]
         }
-    ]
+    ],
+    removed: {type: Boolean, default: false}
 });
 var Resource = mongodb.mongoose.model("Resource", ResourceSchema);
 
