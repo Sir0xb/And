@@ -62,8 +62,6 @@ define(["knockout", "ko-textcut", "ko-hover", "ko-beforeSubscribe", "ko-onecBefo
             console.log(newValue);
         });
 
-        self.parent.loading(false);
-
         //测试接口
         if (self.parent.debug) {
             case4 = self;

@@ -3,6 +3,8 @@
 path = require "path"
 gulp = require "gulp"
 
+es6transpiler = require "gulp-es6-transpiler"
+
 browserSync = require("browser-sync").create()
 runSequence = require "run-sequence"
 
@@ -15,13 +17,25 @@ rename  = require "gulp-rename"
 clean   = require "gulp-clean"
 rev     = require "gulp-rev"
 
+es6Apps = [
+    "es6apps"
+]
+
 apps = [
+    "demos"
     "login"
     "menus"
     "signup"
     "test"
+    "users"
     "welcome"
 ]
+
+gulp.task "cleanLog", ->
+    gulp.src ["log/*.log"],
+        read    : no
+        force   : yes
+    .pipe clean()
 
 gulp.task "clean", ->
     gulp.src [
@@ -37,9 +51,27 @@ gulp.task "clean:js", ->
         force   : yes
     .pipe(clean()) for appName in apps
 
-gulp.task "js", ["clean:js"], ->
+gulp.task "es6", ["clean:js"], ->
     gulp.src ["public/apps/#{appName}/modules/**/*.js", "!public/apps/#{appName}/modules/**/*.min.js"]
     .pipe plumber()
+    .pipe es6transpiler()
+    .pipe jshint()
+    .pipe rename
+        extname: ".min.js"
+    .pipe uglify
+        managle: no
+    .pipe rev()
+    .pipe gulp.dest "public/apps/#{appName}/modules/"
+    .pipe rev.manifest
+        path    : path.join(__dirname, "public/apps/#{appName}/rev-manifest.json"),
+        cwd     : path.join(__dirname, "public/apps/#{appName}/"),
+        merge   : yes
+    .pipe gulp.dest "public/apps/#{appName}/" for appName in es6Apps
+
+gulp.task "js", ->
+    gulp.src ["public/apps/#{appName}/modules/**/*.js", "!public/apps/#{appName}/modules/**/*.min.js"]
+    .pipe plumber()
+    # .pipe es6transpiler()
     .pipe jshint()
     .pipe rename
         extname: ".min.js"
@@ -90,7 +122,7 @@ gulp.task "browser-sync", ->
         port    : 3000
 
 gulp.task "default", ->
-    runSequence "clean", "js", "html"#, "browser-sync"
+    runSequence "cleanLog", "clean", "es6", "js", "html"
 
     gulp.watch [
         "public/apps/#{appName}/modules/**/*.js"
@@ -98,6 +130,5 @@ gulp.task "default", ->
         "public/apps/#{appName}/templates/**/*.html"
         "!public/apps/#{appName}/templates/**/*.tmpl.html"
     ], (->
-        runSequence "clean", "js", "html"
+        runSequence "clean", "es6", "js", "html"
     ) for appName in apps
-    #.on "change", browserSync.reload for appName in apps

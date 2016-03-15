@@ -1,11 +1,16 @@
 var Tools = require("./resTools");
 
 var Customs = require("./Customs");
+var Demos = require("./Demos");
 var Login = require("./Login");
 var Signup = require("./Signup");
 var Menus = require("./Menus");
+<<<<<<< HEAD
 var ResourceDepot = require("./ResourceDepot");
 var Upload = require("./Upload");
+=======
+var Users = require("./Users");
+>>>>>>> master
 
 module.exports = function (app) {
     app.get("/", function (req, res, next) {
@@ -20,13 +25,19 @@ module.exports = function (app) {
 
     Customs(app);
 
+    Demos(app);
+
     Login(app);
 
     Signup(app);
 
     Menus(app);
 
+<<<<<<< HEAD
     ResourceDepot(app);
 
     Upload(app);
+=======
+    Users(app);
+>>>>>>> master
 };

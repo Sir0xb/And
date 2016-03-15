@@ -1,0 +1,205 @@
+<div class="ui styled fluid accordion">
+    <div class="title">
+        <h3>
+            <i class="dropdown icon"></i>
+            普通数据 ko 方式展示到页面 (单向流)
+        </h3>
+    </div>
+    <div class="content">
+        <div class="ui message">
+            <div class="header">
+                数据内容
+            </div>
+            <p data-bind="text: text1"></p>
+        </div>
+
+        <div class="ui message red">
+            <div class="header">
+                text 方式绑定到 input
+            </div>
+            <form class="ui form">
+                <div class="field">
+                    <label>&nbsp</label>
+                    <input type="text" data-bind="text: text1">
+                </div>
+            </form>
+        </div>
+
+        <div class="ui message">
+            <div class="header">
+                value 方式绑定到 input
+            </div>
+            <form class="ui form">
+                <div class="field">
+                    <label>&nbsp</label>
+                    <input type="text" data-bind="value: text1">
+                </div>
+            </form>
+        </div>
+
+        <div class="ui message red">
+            <div class="header">
+                value 方式绑定到静态元素
+            </div>
+            ---- 内容展示 ----
+            <p data-bind="value: text1"></p>
+            ---- /内容展示 ----
+        </div>
+
+        <div class="ui message">
+            <div class="header">
+                text 方式绑定到静态元素
+            </div>
+            ---- 内容展示 ----
+            <p data-bind="text: text1"></p>
+            ---- /内容展示 ----
+        </div>
+    </div>
+
+    <div class="title">
+        <h3>
+            <i class="dropdown icon"></i>
+            ko 数据展示到页面 (可单向 ｜ 可双向)
+        </h3>
+    </div>
+    <div class="content">
+        <div class="ui message">
+            <div class="header">
+                数据内容
+            </div>
+            <p data-bind="text: text2"></p>
+        </div>
+
+        <div class="ui message">
+            <div class="header">
+                value 方式绑定到 input
+            </div>
+            <form class="ui form">
+                <div class="field">
+                    <label>&nbsp</label>
+                    <input type="text" data-bind="value: text2">
+                </div>
+            </form>
+        </div>
+
+        <div class="ui message">
+            <div class="header">
+                text 方式绑定到静态元素
+            </div>
+            <p data-bind="text: text2"></p>
+        </div>
+    </div>
+
+    <div class="title">
+        <h3>
+            <i class="dropdown icon"></i>
+            解决数据更新问题
+        </h3>
+    </div>
+    <div class="content">
+        <p>
+            "keyup" - updates your view model when the user releases a key.
+        </p>
+        <p>
+            "keypress" - updates your view model when the user has typed a key. Unlike keyup, this updates repeatedly while the user holds a key down.
+        </p>
+        <p>
+            "afterkeydown" - updates your view model as soon as the user begins typing a character. This works by catching the browser’s keydown event and handling the event asynchronously. This does not work in some mobile browsers.
+        </p>
+
+        <div class="ui message">
+            <div class="header">
+                数据内容
+            </div>
+            <p data-bind="text: text3"></p>
+        </div>
+
+        <div class="ui message">
+            <div class="header">
+                value 方式绑定到 input
+            </div>
+            <form class="ui form">
+                <div class="field">
+                    <label>&nbsp</label>
+                    <input type="text" data-bind="value: text3, valueUpdate: 'keyup'">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="title">
+        <h3>
+            <i class="dropdown icon"></i>
+            解析成 html 格式
+        </h3>
+    </div>
+    <div class="content">
+        <div class="ui message">
+            <div class="header">
+                数据内容
+            </div>
+            <p data-bind="html: text4"></p>
+        </div>
+
+        <div class="ui message">
+            <div class="header">
+                value 方式绑定到 input
+            </div>
+            <form class="ui form">
+                <div class="field">
+                    <label>&nbsp</label>
+                    <input type="text" data-bind="value: text4, valueUpdate: 'keyup'">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="title">
+        <h3>
+            <i class="dropdown icon"></i>
+            其他数据来源
+        </h3>
+    </div>
+    <div class="content">
+        <div class="ui message">
+            <div class="header">
+                来自普通函数返回值(单向流)
+            </div>
+            <p data-bind="text: text5()"></p>
+        </div>
+
+        <div class="ui message">
+            <div class="header">
+                value 方式绑定到 input
+            </div>
+            <form class="ui form">
+                <div class="field">
+                    <label>&nbsp</label>
+                    <input type="text" data-bind="value: text5(), valueUpdate: 'keyup'">
+                </div>
+            </form>
+        </div>
+
+        <div class="ui message">
+            <div class="header">
+                来自两个 ko 对象
+            </div>
+            <label>数据1</label>
+            <p data-bind="text: text6_1"></p>
+            <label>数据2</label>
+            <p data-bind="text: text6_2"></p>
+        </div>
+
+        <div class="ui message">
+            <div class="header">
+                value 方式绑定到 input
+            </div>
+            <form class="ui form">
+                <div class="field">
+                    <label>&nbsp</label>
+                    <input type="text" data-bind="value: text6, valueUpdate: 'keyup'">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

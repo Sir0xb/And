@@ -1,9 +1,8 @@
+var Tools = require("./resTools");
+
 module.exports = function(app) {
-    app.post("/users", function(req, res) {
-        res.contentType('json');
-        res.send(JSON.stringify({
-            status: "success"
-        }));
-        res.end();
+    app.get("/users", function (req, res, next) {
+        Tools.log('Users', 'get', 'users', '用户管理页面', 'users');
+        Tools.pageJump(req, res, next, "index.html", "用户管理", "users");
     });
 };

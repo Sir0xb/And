@@ -1,38 +1,35 @@
-define(["knockout"], function (ko) {
+define(["knockout", "Super", "jquery"], function (ko, Super, $) {
     return function (context) {
-        var self = this;
+        var self = Super.call(this, context);
 
-        self.parent = context.parent;
-        self.data = context.data;
-
-        self.text1 = "string";
-        self.text2 = ko.observable("string");
-        self.text3 = ko.observable("string");
-        self.text4 = ko.observable("<s>string</s>");
+        self.text1 = "测试数据内容";
+        self.text2 = ko.observable("测试数据内容");
+        self.text3 = ko.observable("测试数据内容");
+        self.text4 = ko.observable("<s>测试数据内容</s>");
         self.text5 = function () {
             console.log('text5 函数被运行');
-            return "string";
+            return "测试数据内容";
         };
 
+        self.text6_1 = ko.observable('123456');
+        self.text6_2 = ko.observable('abcdef');
         self.text6 = ko.pureComputed({
             read: function () {
-                return this.text2() + ' ' + this.text3();
+                return this.text6_1() + ' ' + this.text6_2();
             },
             write: function (value) {
                 var lastSpacePos = value.lastIndexOf(" ");
                 if (lastSpacePos > 0) {
-                    this.text2(value.substring(0, lastSpacePos));
-                    this.text3(value.substring(lastSpacePos + 1));
+                    this.text6_1(value.substring(0, lastSpacePos));
+                    this.text6_2(value.substring(lastSpacePos + 1));
                 }
             },
             owner: self
         });
 
-        self.parent.loading(false);
-
         //监听测试
-        ko.utils.registerEventHandler(document.body, "pageReady", function () {
-            console.log("ko event");
+        $('body').one('pageReady', function () {
+            $('.ui.accordion').accordion();
         });
 
         //测试接口

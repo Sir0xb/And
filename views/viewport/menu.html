@@ -4,27 +4,51 @@
             <img class="logo" src="images/logo.png" style="width: 40px;">
             AND
         </a>
-        <% if(user) {%>
-        <div class="ui simple dropdown item">
-            Dropdown <i class="dropdown icon"></i>
-            <div class="menu">
-                <a class="item" href="#">Link Item</a>
-                <a class="item" href="#">Link Item</a>
-                <div class="divider"></div>
-                <div class="header">Header Item</div>
-                <div class="item">
-                    <i class="dropdown icon"></i>
-                    Sub Menu
+        <% if(user) { %>
+        <% for(var i = 0; i < menus.length; i++) { %>
+            <% if (menus[i].subMenu && menus[i].subMenu.length > 0) { %>
+                <div class="ui simple dropdown item">
+                    <%= menus[i].menuName %> <i class="dropdown icon"></i>
                     <div class="menu">
-                        <a class="item" href="#">Link Item</a>
-                        <a class="item" href="#">Link Item</a>
+                        <% for(var j = 0; j < menus[i].subMenu.length; j++) { %>
+                            <% if (menus[i].subMenu[j].subMenu && menus[i].subMenu[j].subMenu.length > 0){ %>
+                                <div class="item">
+                                    <i class="dropdown icon"></i>
+                                    <%= menus[i].subMenu[j].menuName %>
+                                    <div class="menu">
+                                        <% for(var k = 0; k < menus[i].subMenu[j].subMenu.length > 0; k++) {%>
+                                            <% if(menus[i].subMenu[j].subMenu[k].menuName == '--------------------'){ %>
+                                                <div class="divider"></div>
+                                            <% } else { %>
+                                                <a href="<%= menus[i].subMenu[j].subMenu[k].link %>" class="item"><%= menus[i].subMenu[j].subMenu[k].menuName %></a>
+                                            <% } %>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            <% } else {%>
+                                <% if(menus[i].subMenu[j].menuId == '' && menus[i].subMenu[j].menuName == '--------------------') {%>
+                                    <div class="divider"></div>
+                                <% } else if(menus[i].subMenu[j].menuId == '' && menus[i].subMenu[j].menuName != '--------------------') { %>
+                                    <div class="header"><%= menus[i].subMenu[j].menuName %></div>
+                                <% } else { %>
+                                    <a href="<%= menus[i].subMenu[j].link %>" class="item"><%= menus[i].subMenu[j].menuName %></a>
+                                <% } %>
+                            <% } %>
+                        <% } %>
                     </div>
                 </div>
+<<<<<<< HEAD
                 <a class="item" href="#">Link Item</a>
             </div>
         </div>
         <a href="/menus" class="item">菜单管理</a>
         <a href="/resourceDepot" class="item">资源库</a>
+=======
+            <% } else { %>
+                <a href="<%= menus[i].link %>" class="item"><%= menus[i].menuName %></a>
+            <% } %>
+        <% } %>
+>>>>>>> master
         <% } %>
     </div>
 </div>

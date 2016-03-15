@@ -1,73 +1,113 @@
 <div class="ui grid">
     <div class="four wide column" style="overflow: hidden;">
         <div class="ui list">
+            <!-- ko foreach: menuList -->
             <div class="item">
-                <i class="tree icon"></i>
-                <div class="content">
-                    <a href="javascript:void(0);" data-bind="click: backToRoot">
-                        <div class="header">Root</div>
-                    </a>
 
+                <!-- 有子菜单显示成文件图标 -->
+                <!-- ko if: $data["subMenu"] && subMenu().length > 0 -->
+                <i class="tree icon" data-bind="css: { 'pointing right red': $parent.focusMenu().menuId() == menuId() }"></i>
+                <!-- /ko -->
+
+                <!-- 没有子菜单显示成叶片 -->
+                <!-- ko ifnot: $data["subMenu"] && subMenu().length > 0 -->
+                <i class="leaf icon" data-bind="css: { 'pointing right red': $parent.focusMenu().menuId() == menuId() }"></i>
+                <!-- /ko -->
+
+                <div class="content">
+                    <a href="javascript:void(0);" data-bind="click: $parent.selectMenu.bind($data, false, 0)">
+                        <div class="header" data-bind="text: menuName"></div>
+                        <div class="description" data-bind="text: desc"></div>
+                    </a>
+                    <!-- ko if: $data["subMenu"] -->
                     <div class="list">
-                        <!-- 菜单列表 -->
-                        <!-- ko foreach: menuList -->
+                        <!-- ko foreach: subMenu -->
                         <div class="item">
 
                             <!-- 有子菜单显示成文件夹图标 -->
-                            <!-- ko if: $data["subMenu"] -->
-                            <i class="book icon" data-bind="css: { 'pointing right red': $parent.focusMenu().menuId() == $data.menuId() }"></i>
+                            <!-- ko if: $data["subMenu"] && subMenu().length > 0 -->
+                            <i class="book icon" data-bind="css: { 'pointing right red': $parents[1].focusMenu().menuId() == menuId() }"></i>
                             <!-- /ko -->
 
-                            <!-- 没有子菜单显示成文件图标 -->
-                            <!-- ko ifnot: $data["subMenu"] -->
-                            <i class="leaf icon" data-bind="css: { 'pointing right red': $parent.focusMenu().menuId() == $data.menuId() }"></i>
+                            <!-- 没有子菜单显示成叶子图标 -->
+                            <!-- ko ifnot: $data["subMenu"] && subMenu().length > 0 -->
+                            <i class="leaf icon" data-bind="css: { 'pointing right red': $parents[1].focusMenu().menuId() == menuId() }"></i>
                             <!-- /ko -->
 
                             <div class="content">
-                                <a href="javascript:void(0);" data-bind="click: $parent.editMenu.bind($data, 1, $parent)">
-                                    <div class="header" data-bind="text: $data.menuName"></div>
-                                    <div class="description" data-bind="text: $data.desc"></div>
+                                <a href="javascript:void(0);" data-bind="click: $parents[1].selectMenu.bind($data, $parent, 1)">
+                                    <div class="header" data-bind="text: menuName"></div>
+                                    <div class="description" data-bind="text: desc"></div>
                                 </a>
-
-                                <!-- 判断是否有子菜单，控制隐藏或显示区域 -->
                                 <!-- ko if: $data["subMenu"] -->
                                 <div class="list">
-
-                                    <!-- 子菜单列表 -->
-                                    <!-- ko foreach: $data.subMenu -->
+                                    <!-- ko foreach: subMenu -->
                                     <div class="item">
 
+                                        <!-- ko if: menuId() != '' -->
+
                                         <!-- 有子菜单显示成文件夹图标 -->
-                                        <!-- ko if: $data["subMenu"] -->
-                                        <i class="book icon" data-bind="css: { 'pointing right red': $parents[1].focusMenu().menuId() == $data.menuId() }"></i>
+                                        <!-- ko if: $data["subMenu"] && subMenu().length > 0 -->
+                                        <i class="book icon" data-bind="css: { 'pointing right red': $parents[2].focusMenu().menuId() == menuId() }"></i>
                                         <!-- /ko -->
 
-                                        <!-- 没有子菜单显示成文件图标 -->
-                                        <!-- ko ifnot: $data["subMenu"] -->
-                                        <i class="leaf icon" data-bind="css: { 'pointing right red': $parents[1].focusMenu().menuId() == $data.menuId() }"></i>
+                                        <!-- 没有子菜单显示成叶子图标 -->
+                                        <!-- ko ifnot: $data["subMenu"] && subMenu().length > 0 -->
+                                        <i class="leaf icon" data-bind="css: { 'pointing right red': $parents[2].focusMenu().menuId() == menuId() }"></i>
                                         <!-- /ko -->
+
                                         <div class="content">
-                                            <a href="javascript:void(0);" data-bind="click: $parents[1].editMenu.bind($data, 2, $parent)">
-                                                <div class="header" data-bind="text: $data.menuName"></div>
-                                                <div class="description" data-bind="text: $data.desc"></div>
+                                            <a href="javascript:void(0);" data-bind="click: $parents[2].selectMenu.bind($data, $parent, 2)">
+                                                <div class="header" data-bind="text: menuName"></div>
+                                                <div class="description" data-bind="text: desc"></div>
                                             </a>
-
                                             <!-- ko if: $data["subMenu"] -->
                                             <div class="list">
-                                                <!-- ko foreach: $data.subMenu -->
+                                                <!-- ko foreach: subMenu -->
                                                 <div class="item">
-                                                    <i class="leaf icon" data-bind="css: { 'pointing right red': $parents[2].focusMenu().menuId() == $data.menuId() }"></i>
+                                                    <!-- ko if: menuId() != '' -->
+
+                                                    <!-- 有子菜单显示成文件夹图标 -->
+                                                    <!-- ko if: $data["subMenu"] && subMenu().length > 0 -->
+                                                    <i class="book icon" data-bind="css: { 'pointing right red': $parents[3].focusMenu().menuId() == menuId() }"></i>
+                                                    <!-- /ko -->
+
+                                                    <!-- 没有子菜单显示成叶子图标 -->
+                                                    <!-- ko ifnot: $data["subMenu"] && subMenu().length > 0 -->
+                                                    <i class="leaf icon" data-bind="css: { 'pointing right red': $parents[3].focusMenu().menuId() == menuId() }"></i>
+                                                    <!-- /ko -->
+
                                                     <div class="content">
-                                                        <a href="javascript:void(0);" data-bind="click: $parents[2].editMenu.bind($data, 3, $parent)">
-                                                            <div class="header" data-bind="text: $data.menuName"></div>
-                                                            <div class="description" data-bind="text: $data.desc"></div>
+                                                        <a href="javascript:void(0);" data-bind="click: $parents[3].selectMenu.bind($data, $parent, 3)">
+                                                            <div class="header" data-bind="text: menuName"></div>
+                                                            <div class="description" data-bind="text: desc"></div>
                                                         </a>
                                                     </div>
+
+                                                    <!-- /ko -->
+
+                                                    <!-- ko ifnot: menuId() != '' -->
+
+                                                    <div class="content">
+                                                        <div class="header" data-bind="text: menuName"></div>
+                                                    </div>
+
+                                                    <!-- /ko -->
                                                 </div>
                                                 <!-- /ko -->
                                             </div>
                                             <!-- /ko -->
                                         </div>
+
+                                        <!-- /ko -->
+
+                                        <!-- ko ifnot: menuId() != '' -->
+
+                                        <div class="content">
+                                            <div class="header" data-bind="text: menuName"></div>
+                                        </div>
+
+                                        <!-- /ko -->
                                     </div>
                                     <!-- /ko -->
                                 </div>
@@ -76,8 +116,10 @@
                         </div>
                         <!-- /ko -->
                     </div>
+                    <!-- /ko -->
                 </div>
             </div>
+            <!-- /ko -->
         </div>
     </div>
     <div class="twelve wide column">
@@ -85,37 +127,37 @@
             <div class="three fields">
                 <div class="field">
                     <label>菜单ID</label>
-                    <input type="text" placeholder="菜单ID" data-bind="value: _focusMenu().menuId, valueUpdate: 'afterkeydown'">
+                    <input type="text" data-bind="value: focusMenu().menuId, disable: true">
                 </div>
                 <div class="field">
                     <label>菜单名称</label>
-                    <input type="text" placeholder="菜单名称" data-bind="value: _focusMenu().menuName, valueUpdate: 'afterkeydown'">
+                    <input type="text" data-bind="value: focusMenu().menuName, disable: true">
                 </div>
                 <div class="field">
                     <label>菜单等级</label>
-                    <select class="ui fluid dropdown" data-bind="options: ['7', '6', '5', '4', '3', '2', '1', '0'], value: _focusMenu().level, optionsCaption: '请选择菜单等级'"></select>
+                    <input type="text" data-bind="value: focusMenu().level, disable: true">
                 </div>
             </div>
             <div class="three fields">
                 <div class="field">
                     <label>描述</label>
-                    <input type="text" placeholder="描述" data-bind="value: _focusMenu().desc, valueUpdate: 'afterkeydown'">
+                    <input type="text" data-bind="value: focusMenu().desc, disable: true">
                 </div>
                 <div class="field">
                     <label>应用地址</label>
-                    <input type="text" placeholder="应用地址" data-bind="value: _focusMenu().link, valueUpdate: 'afterkeydown'">
+                    <input type="text" data-bind="value: focusMenu().link, disable: true">
                 </div>
             </div>
-            <div class="ui inverted orange button" data-bind="click: reset, css: { 'disabled': isEmpty() }">清空</div>
-            <div class="ui inverted blue button" data-bind="click: saveChange">应用修改</div>
-            <div class="ui inverted green button" data-bind="click: addSubMenu, css: { 'disabled': focusMenuLevel() == 3 }">作为子菜单添加</div>
-            <div class="ui inverted violet button">添加说明子菜单</div>
-            <div class="ui inverted red button">删除菜单</div>
-            <div class="ui inverted olive button">更新主菜单</div>
+            <button class="ui inverted orange button" data-bind="disable: focusMenu().menuId() == '' || [0].indexOf(focusMenuLevel()) != -1, click: editMenu">编辑</button>
+            <button class="ui inverted green button" data-bind="disable: focusMenu().menuId() == '' || [3].indexOf(focusMenuLevel()) != -1, click: addSubMenu">添加子菜单</button>
+            <button class="ui inverted violet button" data-bind="disable: focusMenu().menuId() == '' || [0, 3].indexOf(focusMenuLevel()) != -1, click: addDescMenu">添加说明子菜单</button>
+            <button class="ui inverted blue button" data-bind="disable: focusMenu().menuId() == '' || [0, 3].indexOf(focusMenuLevel()) != -1, click: addLine">添加横线</button>
+            <button class="ui inverted red button" data-bind="disable: focusMenu().menuId() == '' || (focusMenu().subMenu && focusMenu().subMenu().length > 0) || [0].indexOf(focusMenuLevel()) != -1, click: removeMenu">删除</button>
+            <button class="ui inverted olive button" data-bind="click: function(){ location.reload(); }">更新主菜单</button>
         </div>
-        <!-- ko if: focusMenu()["subMenu"] -->
         <h2 class="ui dividing header"></h2>
-        <div class="ignored ui info message">以下展示当前节点子节点信息</div>
+        <div class="ignored ui info message">这里展示当前节点子节点信息</div>
+        <!-- ko if: focusMenu()["subMenu"] && focusMenu().subMenu().length > 0 -->
         <table class="ui celled table">
             <thead>
                 <tr>
@@ -123,7 +165,7 @@
                     <th>菜单ID</th>
                     <th>菜单名称</th>
                     <th>应用地址</th>
-                    <th>功能</th>
+                    <th style="width: 225px;">功能</th>
                 </tr>
             </thead>
             <tbody>
@@ -135,12 +177,10 @@
                     <td data-bind="text: menuId"></td>
                     <td data-bind="text: menuName"></td>
                     <td data-bind="text: link"></td>
-                    <td style="width: 400px;">
-                        <div class="ui mini inverted orange button" data-bind="click: $parent.move, css: { 'disabled': $index() == 0 }">上移</div>
-                        <div class="ui mini inverted yellow button" data-bind="click: $parent.down, css: { 'disabled': $index() == $parent.focusMenu().subMenu().length - 1 }">下移</div>
-                        <div class="ui mini inverted green button" data-bind="css: { 'disabled': $parent.focusMenuLevel() == 0 }">上加横线</div>
-                        <div class="ui mini inverted blue button" data-bind="css: { 'disabled': $parent.focusMenuLevel() == 0 }">下加横线</div>
-                        <div class="ui mini inverted red button" data-bind="click: $parent.removeMenu">删除</div>
+                    <td>
+                        <button class="ui mini inverted green button" data-bind="disable: $index() == 0, click: $parent.upMenu">上移</button>
+                        <button class="ui mini inverted blue button" data-bind="disable: $index() == $parent.focusMenu().subMenu().length - 1, click: $parent.downMenu">下移</button>
+                        <button class="ui mini inverted red button" data-bind="disable: $data.subMenu && $data.subMenu().length > 0, click: $parent.removeSubMenu">删除</button>
                     </td>
                 </tr>
                 <!-- /ko -->
@@ -149,3 +189,4 @@
         <!-- /ko -->
     </div>
 </div>
+<div id="wind" class="ui modal" data-bind="module: palette"></div>

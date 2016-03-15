@@ -1,0 +1,21 @@
+<i class="close icon"></i>
+<div class="header">添加说明子菜单</div>
+<div class="content">
+    <div class="twelve wide column">
+        <div class="ui form">
+            <div class="three fields">
+                <div class="required field">
+                    <label>说明内容</label>
+                    <input type="text" data-bind="value: focusMenu().menuName, valueUpdate: 'keyup', validationElement: focusMenu().menuName">
+                    <div class="field error">
+                        <label data-bind="validationMessage: focusMenu().menuName"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="actions">
+    <div class="ui black deny button">取消</div>
+    <div class="ui blue right button" data-bind="click: submit">确定</div>
+</div>

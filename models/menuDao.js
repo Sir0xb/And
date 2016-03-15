@@ -24,8 +24,8 @@ MenuDao.prototype.save = function (obj, callback) {
     });
 };
 
-MenuDao.prototype.updateById = function (menuId, callback) {
-    Menu.update({ menuId: menuId }, function (err) {
+MenuDao.prototype.updateById = function (menuId, obj, callback) {
+    Menu.update({ menuId: menuId }, obj, function (err) {
         callback(err);
     });
 };
