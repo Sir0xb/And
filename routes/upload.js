@@ -39,7 +39,7 @@ module.exports = function(app) {
                     res.json({success: false, message:'操作失败'});
                 } else {
                     //上传成功，返回文件的相对路径
-                    var fileUrl = '/public/upload/' + fileName;
+                    var fileUrl = '/upload/' + fileName;
                     res.json({success: true, message: {name: fileName, url: fileUrl} });
                 }
             });

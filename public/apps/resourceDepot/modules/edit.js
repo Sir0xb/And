@@ -61,7 +61,8 @@ define(['knockout', 'Tools', 'uploader', 'marked', 'hljs', '../../../lib/YQuploa
 	                multiple: true
 				},
 				onCustomUploadSuccess: function(file, data){
-					self.formData.demoUrls.push({name: data.message.name, url: data.message.url});
+                    self.formData.demoUrls.removeAll();
+					self.formData.demoUrls.push(data.message.url);
 				}
 			});
         });
