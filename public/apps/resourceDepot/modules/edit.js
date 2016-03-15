@@ -1,4 +1,4 @@
-define(['knockout', 'Tools', 'uploader', 'marked', 'hljs', '../../../lib/YQuploader-1.0/skins/default/tpl', './dataMap', 'sweetalert', 'css!../../../lib/YQuploader-1.0/skins/default/style', 'css!../../../lib/highlight/styles/monokai-sublime', 'css!../../../lib/sweetalert/sweetalert.css', 'ko-mapping'], function(ko, $tools, YQuploader, marked, highlight, skin, dataMap, swal){
+define(['knockout', 'Tools', 'uploader', 'marked', 'hljs', 'uploader_skin', './dataMap', 'sweetalert', 'css!css_monokai', 'ko-mapping'], function(ko, $tools, YQuploader, marked, highlight, skin, dataMap, swal){
 	return function (context) {
 		var self = this;
 

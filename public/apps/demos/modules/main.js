@@ -1,4 +1,4 @@
-define(["knockout", "Super", "sammy"], function (ko, Super, Sammy) {
+define(["knockout", "Super", "sammy", "marked", "hljs"], function (ko, Super, Sammy, marked, highlight) {
     return function (context) {
         var self = Super.call(this, context);
 
@@ -15,6 +15,10 @@ define(["knockout", "Super", "sammy"], function (ko, Super, Sammy) {
                     },
                     afterRender: function (){
                         ko.utils.triggerEvent(document.body, "pageReady");
+
+                        $('code').each(function(i, block) {
+                            hljs.highlightBlock(block);
+                        });
                     }
                 });
             });
