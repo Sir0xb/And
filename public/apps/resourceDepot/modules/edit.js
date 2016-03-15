@@ -1,19 +1,16 @@
-define(['knockout', 'Tools', 'uploader', 'marked', 'hljs', 'uploader_skin', './dataMap', 'sweetalert', 'css!css_monokai', 'ko-mapping'], function(ko, $tools, YQuploader, marked, highlight, skin, dataMap, swal){
+define(['knockout', "Super", 'Tools', 'uploader', 'marked', 'hljs', 'uploader_skin', './dataMap', 'sweetalert', 'css!css_monokai', 'ko-mapping'], function(ko, Super, $tools, YQuploader, marked, highlight, skin, dataMap, swal){
 	return function (context) {
-		var self = this;
-
-        self.parent = context.parent;
-        self.data = context.data;
+		var self = Super.call(this, context);
 
         self.types = dataMap.types;
 
         self.addFile = function(){
         	this.files.push({name: ko.observable(''), devUrl: ko.observable(''), cdn: ko.observable('')});
-        }
+        };
 
         self.addVersion = function(){
         	self.formData.versionPackage.push({version: ko.observable(''), files: ko.observableArray([{name: ko.observable(''), devUrl: ko.observable(''), cdn: ko.observable('')}])});
-        }
+        };
 
         self.submit = function(){
         	var sdata = ko.mapping.toJS(self.formData);
@@ -27,10 +24,10 @@ define(['knockout', 'Tools', 'uploader', 'marked', 'hljs', 'uploader_skin', './d
                         type: 'success',
                         timer: 2000
                     });
-        			swal("保存成功！", "", "success")
+        			swal("保存成功！", "", "success");
         		}
         	});
-        }
+        };
 
         $('body').on('edit_page_ready', function(){
             //如果有id，则是编辑进来的，初始化数据
@@ -78,9 +75,8 @@ define(['knockout', 'Tools', 'uploader', 'marked', 'hljs', 'uploader_skin', './d
         	return marked(self.formData.useMethod());
         });
 
-        //debug
-        window.edit = self;
-
-
+        if (self.data.test) {
+        	edit = self;
+        }
 	};
 });

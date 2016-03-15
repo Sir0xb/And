@@ -1,19 +1,13 @@
-define(['knockout', 'sammy'], function(ko, Sammy){
+define(['knockout', "Super", 'sammy'], function(ko, Super, Sammy){
 	return function (context) {
-		var self = this;
-
-        self.parent = context.parent;
-        self.data = context.data;
-
-        self.loading = self.parent.loading;
-        self.palette = ko.observable();
+		var self = Super.call(this, context);
 
 		Sammy(function () {
             this.get(/\#\/([^/]+)\/?([^/]*)/, function (){
                 var module    = this.params.splat[0];
                 var itemId    = this.params.splat[1];
                 self.data.itemId = itemId;
-        
+
                 self.palette({
                     name: module,
                     data: {
@@ -32,12 +26,11 @@ define(['knockout', 'sammy'], function(ko, Sammy){
                 this.app.runRoute('get', '#/list')
             })
         });
-        
+
         Sammy().run();
 
-
-        //debug
-        window.add = self;
-
+		if (self.data.test) {
+			main = self;
+		}
 	};
 });

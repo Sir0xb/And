@@ -1,9 +1,6 @@
-define(['knockout', 'Tools', './dataMap', 'ko-mapping'], function(ko, $tools, dataMap){
+define(['knockout', "Super", 'Tools', './dataMap', 'ko-mapping'], function(ko, Super, $tools, dataMap){
 	return function (context) {
-		var self = this;
-
-        self.parent = context.parent;
-        self.data = context.data;
+		var self = Super.call(this, context);
 
         self.dataList = ko.observableArray([]);
         self.typeList = ko.observableArray(dataMap.types);
@@ -19,7 +16,7 @@ define(['knockout', 'Tools', './dataMap', 'ko-mapping'], function(ko, $tools, da
                     }
                 });
             }
-        }
+        };
 
         $('body').on('list_page_ready', function(){
         	//请求列表数据
@@ -31,7 +28,8 @@ define(['knockout', 'Tools', './dataMap', 'ko-mapping'], function(ko, $tools, da
         	});
         });
 
-        //debug
-        window.list = self;
+        if (self.data.test) {
+        	list = self;
+        }
 	};
 });

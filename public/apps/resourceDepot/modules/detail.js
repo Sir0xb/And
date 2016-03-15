@@ -1,9 +1,6 @@
-define(['knockout', 'Tools', './dataMap', 'ko-mapping'], function(ko, $tools, dataMap){
+define(['knockout', "Super", 'Tools', './dataMap', 'ko-mapping'], function(ko, Super, $tools, dataMap){
 	return function (context) {
-		var self = this;
-
-        self.parent = context.parent;
-        self.data = context.data;
+		var self = Super.call(this, context);
 
         self.resource = ko.observable();
 
@@ -24,9 +21,8 @@ define(['knockout', 'Tools', './dataMap', 'ko-mapping'], function(ko, $tools, da
             });
         });
 
-        //debug
-        window.detail = self;
-
-
+		if (self.data.test) {
+			detail = self;
+		}
 	};
 });
