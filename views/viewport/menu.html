@@ -19,6 +19,8 @@
                                         <% for(var k = 0; k < menus[i].subMenu[j].subMenu.length > 0; k++) {%>
                                             <% if(menus[i].subMenu[j].subMenu[k].menuName == '--------------------'){ %>
                                                 <div class="divider"></div>
+                                            <% } else if(menus[i].subMenu[j].subMenu[k].menuId == '' && menus[i].subMenu[j].subMenu[k].menuName != '--------------------') { %>
+                                                <div class="header"><%= menus[i].subMenu[j].subMenu[k].menuName %></div>
                                             <% } else { %>
                                                 <a href="<%= menus[i].subMenu[j].subMenu[k].link %>" class="item"><%= menus[i].subMenu[j].subMenu[k].menuName %></a>
                                             <% } %>
