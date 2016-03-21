@@ -78,6 +78,13 @@ ResourceDao.prototype.findById = function (id, callback) {
 
 ResourceDao.prototype.list = function (callback) {
     Resource.find({}, function (err, obj) {
+        obj.forEach(function(item){
+            console.log(item)
+            if(item.description.length>=80){
+                item.description = item.description.substring(0, 80);
+                item.description += '...';
+            }
+        });
         callback(err, obj);
     });
 }
