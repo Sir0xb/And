@@ -25,7 +25,8 @@ var ResourceSchema = new Schema({
                 }
             ]
         }
-    ]
+    ],
+    removed: {type: Boolean, default: false}
 });
 var Resource = mongodb.mongoose.model("Resource", ResourceSchema);
 
@@ -63,7 +64,7 @@ ResourceDao.prototype.save = function (obj, callback) {
 ResourceDao.prototype.updateById = function (obj, callback) {
     var instance = new Resource(obj);
     instance.set('lastModified', moment().format('YYYY-MM-DD hh:mm:ss'));
-    console.log(instance)
+
     instance.update(instance, function (err) {
         callback(err);
     });
@@ -77,14 +78,24 @@ ResourceDao.prototype.findById = function (id, callback) {
 
 ResourceDao.prototype.list = function (callback) {
     Resource.find({}, function (err, obj) {
+        obj.forEach(function(item){
+            console.log(item)
+            if(item.description.length>=80){
+                item.description = item.description.substring(0, 80);
+                item.description += '...';
+            }
+        });
         callback(err, obj);
     });
 }
 
 ResourceDao.prototype.remove = function(id, callback){
-    Resource.remove({id: id}, function(err){
+    /*Resource.remove({id: id}, function(err){
         callback(err, null);
-    });
+    });*/
+    Resource.findOneAndUpdate({id: id}, {removed: true}, function(err){
+        callback(err, null);
+    })
 }
 
 module.exports = new ResourceDao();

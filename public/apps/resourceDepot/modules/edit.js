@@ -58,7 +58,8 @@ define(['knockout', "Super", 'Tools', 'uploader', 'marked', 'hljs', 'uploader_sk
 	                multiple: true
 				},
 				onCustomUploadSuccess: function(file, data){
-					self.formData.demoUrls.push({name: data.message.name, url: data.message.url});
+                    self.formData.demoUrls.removeAll();
+					self.formData.demoUrls.push(data.message.url);
 				}
 			});
         });
@@ -67,7 +68,7 @@ define(['knockout', "Super", 'Tools', 'uploader', 'marked', 'hljs', 'uploader_sk
 
         marked.setOptions({
 			highlight: function (code, lang, callback) {
-				return highlight.highlightBlock($('<code>'+code+'</code>')[0]);
+				return highlight.highlightBlock($('<xmp>'+code+'</xmp>')[0]);
 			}
 		});
 

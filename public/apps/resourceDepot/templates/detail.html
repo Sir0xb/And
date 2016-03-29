@@ -5,13 +5,13 @@
 	<div class="ui grid clearfix">
 		<div class="column ten wide">
 			<h4>简介：</h4>
-			<p data-bind="text: description"></p>
+			<p data-bind="html: description"></p>
 
 			<h4>使用方法：</h4>
 			<div data-bind="html: useMethod"></div>
 
 			<h4>备注：</h4>
-			<div data-bind="text: comment"></div>
+			<div data-bind="html: comment"></div>
 		</div>
 		<div class="column six wide">
 			<div class="row" data-bind="foreach: demoUrls">
