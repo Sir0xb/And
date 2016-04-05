@@ -1,8 +1,8 @@
 module.exports = {
-    mongodb: 'mongodb://localhost/And',
+    mongodb: 'mongodb://192.168.100.49/And',
     mongoInfo: {
         db      : "And",
-        host    : "localhost",
+        host    : "192.168.100.49",
         port    : 27017
     },
     cookie: {
