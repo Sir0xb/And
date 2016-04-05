@@ -17,9 +17,9 @@ var routes = require("./routes");
 var logDirectory = __dirname + '/log';
 fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
 var accessLogStream = FileStreamRotator.getStream({
-  filename  : logDirectory + '/access-%DATE%.log',
-  frequency : 'daily',
-  verbose   : false
+    filename  : logDirectory + '/access-%DATE%.log',
+    frequency : 'daily',
+    verbose   : false
 });
 
 var app = express();
@@ -40,10 +40,10 @@ app.use(session({
     secret              : Config.cookie.secret,
     resave              : false,
     saveUninitialized   : true,
-    key                 : Config.mongoInfo.db,
+    key                 : "And",
     cookie              : { maxAge: 1000 * 60 * 60 * 24 * 30 },
     store               : new MongoStore({
-        db  : Config.mongoInfo.db
+        url  : Config.mongodb
     })
 }));
 app.use(morgan('combined', {stream: accessLogStream}));
