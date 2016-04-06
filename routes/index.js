@@ -8,6 +8,7 @@ var Menus = require("./Menus");
 var Users = require("./Users");
 var ResourceDepot = require("./ResourceDepot");
 var Upload = require("./Upload");
+var NpmPublish = require("./NpmPublish");
 
 module.exports = function (app) {
     Customs(app);
@@ -33,6 +34,8 @@ module.exports = function (app) {
     Signup(app);
 
     Upload(app);
+
+    NpmPublish(app);
 
     Users(app);
 };

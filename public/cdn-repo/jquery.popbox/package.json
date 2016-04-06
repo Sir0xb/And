@@ -1,0 +1,11 @@
+{
+  "name": "jquery.popbox",
+  "version": "1.1.1",
+  "description": "jquery弹窗插件",
+  "main": "jquery.popbox.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "吕小豹",
+  "license": "ISC"
+}
