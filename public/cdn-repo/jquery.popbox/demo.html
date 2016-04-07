@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8" />
+    <title>示例页面</title>
+    <link rel="stylesheet" href="jquery.popbox.css" />
+    <script src="../jquery/jquery.min.js"></script>
+    <script src="jquery.popbox.js"></script>
+    <style>
+	.pb_custombtn:link, .pb_cancelbtn:link, .pb_custombtn:visited, .pb_cancelbtn:visited{
+		display: inline-block;
+		height: 36px;
+		margin: 0 15px;
+		padding: 0 24px;
+		color: #fff;
+		line-height: 36px;
+		font-weight: normal;
+		font-size: 14px;
+		border-radius: 5px;
+	}
+	.pb_custombtn:link, .pb_custombtn:visited{
+		background: #2C9445;
+	}
+	.pb_custombtn:hover{
+		background: #53A767;
+	}
+	.pb_custombtn:active{
+		background: #53A767;
+	}
+    </style>
+</head>
+<body>
+	<div class="tt">
+		<div>页面内容...</div><div>页面内容...</div><div>页面内容...</div><div>页面内容...</div><div>页面内容...</div><div>页面内容...</div><div>页面内容...</div><div>页面内容...</div><div>页面内容...</div><div>页面内容...</div><div>页面内容...</div><div>页面内容...</div><div>页面内容...</div><div>页面内容...</div><div>页面内容...</div><div>页面内容...</div><div>页面内容...</div><div>页面内容...</div><div>页面内容...</div><div>页面内容...</div><div>页面内容...</div><div>页面内容...</div>	
+	</div>
+    
+<script>
+$.popbox({
+	width : '600px', 
+	maxHeight : '400px',  //body区域的最大高度
+
+	title : '提示',  //标题
+	content : 'hello <ul><li>11</li><li>22</li><li>223</li></ul>',  //主体内容，支持HTML标签
+	//contentSelector : '.tt',
+	contentUrl : 'demo2.html',
+	foot : 'hahahahaah',  //底部内容
+	showMask : true,  //是否显示遮罩层
+	showCloseBtn : true,  //是否显示关闭按钮
+	btns : [
+		{
+			type : 'ok',
+			text : '确定',
+			click : ''
+		},
+		{
+			type : 'cancel',
+			text : '取消',
+			click : ''
+		},{
+			type : 'custom',
+			text : '自定义的按钮',
+			click : function(){
+				alert('自定义');
+			}
+		}
+
+	], //默认显示的按钮
+	draggable : true,  //是否可拖动
+	autoClose : 0, //是否自动关闭，否则设为0，是则设为大于0的数字，表示关闭时间，单位ms
+	blurClose : false,  //点击窗口外部是否关闭窗口
+	onOpen : '', //窗口加载完毕时的动作
+	onClose : '',  //窗口关闭前的动作，返回false可组织窗口关闭
+	onOk : function(){alert('确定');},  //点击ok按钮
+	onCancel : ''  //点击cancel按钮
+});
+</script>
+</body>
+</html>
