@@ -257,3 +257,6 @@ body {
 .lh24{
     line-height: 24px;
 }
+.pre{
+    position: relative;
+}

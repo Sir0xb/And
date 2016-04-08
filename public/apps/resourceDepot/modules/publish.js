@@ -1,4 +1,4 @@
-define(['knockout', "Super", 'Tools', 'uploader', 'uploader_skin'], function(ko, Super, $tools, YQuploader, skin){
+define(['knockout', "Super", 'Tools', 'uploader', 'uploader_skin', 'sweetalert'], function(ko, Super, $tools, YQuploader, skin, swal){
 	return function (context) {
 		var self = Super.call(this, context);
 
@@ -18,7 +18,7 @@ define(['knockout', "Super", 'Tools', 'uploader', 'uploader_skin'], function(ko,
 	                multiple: true
 				},
 				onCustomUploadSuccess: function(file, data){
-                    
+                    swal('发布成功！', '', 'success');
 				}
 			});
 		});
