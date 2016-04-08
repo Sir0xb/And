@@ -12,6 +12,10 @@ define(['knockout', "Super", 'Tools', 'uploader', 'marked', 'hljs', 'uploader_sk
         	self.formData.versionPackage.push({version: ko.observable(''), files: ko.observableArray([{name: ko.observable(''), devUrl: ko.observable(''), cdn: ko.observable('')}])});
         };
 
+        self.removeVersion = function(){
+            self.formData.versionPackage.remove(this);
+        }
+
         self.submit = function(){
         	var sdata = ko.mapping.toJS(self.formData);
         	console.log(sdata);
