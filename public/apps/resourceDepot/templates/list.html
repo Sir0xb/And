@@ -7,7 +7,8 @@
 	</div>
 	<!-- ko foreach: typeList -->
 	<div class="column sixteen wide resourcelist">
-		<h2 data-bind="text: name"></h2>
+		<h2 class="dib" data-bind="text: name"></h2>
+		<i class="circular heart icon link typedesc vat red" data-variation="inverted"  data-bind="attr:{'data-content': desc, 'data-variation': 'very wide'}"></i>
 		<div class="ui cards three" data-bind="foreach: $parent.dataList">
 			<!-- ko if: !removed && type==$parent.value -->
 			<div class="card grey honeydew">
@@ -15,7 +16,7 @@
 					<a class="header" data-bind="text: title, attr: {href: '#/detail/'+id}"></a>
 					<div class="meta" data-bind="text: lastModified">
 					</div>
-					<p data-bind="text: description"></p>
+					<p class="mt5" data-bind="text: description"></p>
 				</div>
 				<div class="extra content">
 					<div class="ui labels textr">
