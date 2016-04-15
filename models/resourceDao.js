@@ -13,7 +13,7 @@ var ResourceSchema = new Schema({
     owner: String,  //维护者
     ownerQQ: String,  //维护者QQ
     comment: String,  //备注
-    lastModified: {type: String, default: moment().format('YYYY-MM-DD hh:mm:ss')}, //上次修改时间
+    lastModified: {type: String, default: moment().format('YYYY-MM-DD HH:mm:ss')}, //上次修改时间
     versionPackage: [
         {           
             version: String, //版本号
@@ -63,8 +63,7 @@ ResourceDao.prototype.save = function (obj, callback) {
 
 ResourceDao.prototype.updateById = function (obj, callback) {
     var instance = new Resource(obj);
-    instance.set('lastModified', moment().format('YYYY-MM-DD hh:mm:ss'));
-
+    instance.set('lastModified', moment().format('YYYY-MM-DD HH:mm:ss'));
     instance.update(instance, function (err) {
         callback(err);
     });
@@ -79,7 +78,6 @@ ResourceDao.prototype.findById = function (id, callback) {
 ResourceDao.prototype.list = function (callback) {
     Resource.find({}, function (err, obj) {
         obj.forEach(function(item){
-            console.log(item)
             if(item.description.length>=80){
                 item.description = item.description.substring(0, 80);
                 item.description += '...';

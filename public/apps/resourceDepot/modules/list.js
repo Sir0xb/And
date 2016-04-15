@@ -26,6 +26,7 @@ define(['knockout', "Super", 'Tools', './dataMap', 'ko-mapping'], function(ko, S
         			self.dataList(data.data);
         		}
         	});
+            $('.typedesc').popup();
         });
 
         if (self.data.test) {
