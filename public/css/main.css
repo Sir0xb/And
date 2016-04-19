@@ -257,6 +257,9 @@ body {
 .textr{
     text-align: right;
 }
+.textc{
+    text-align: center;
+}
 .lh24{
     line-height: 24px;
 }

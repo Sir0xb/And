@@ -1,8 +1,46 @@
+<style>
+@font-face {
+  font-family: 'ab';
+  src: 
+  	url('../../../font/ab.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'll';
+  src: 
+  	url('../../../font/ll.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*使用选择器指定字体*/
+.topbanner .item {
+    font-family: 'ab';
+    font-size: 20px;
+	color: #0B5657;
+}
+.topbanner h1{
+	font-family: 'll';
+	font-size: 40px;
+	color: #0B5657;
+}
+</style>
 <div class="ui grid">
+	<!-- ko if: data.currentUser && data.currentUser.level<2 -->
 	<div class="row">
 		<div class="column right aligned">
 			<a href="#/edit" class="ui button green">添加</a>
 			<a href="#/publish" class="ui button orange">发布</a>
+		</div>
+	</div>
+	<!-- /ko -->
+	<div class="topbanner">
+		<h1 class="textc">前端资源仓库</h1>
+		<div class="ui list" style="font-size: 16px;">
+			<div class="item">1. npm set registry http://192.168.100.49:4873</div>
+			<div class="item">2. npm install jquery 1.9.1</div>
 		</div>
 	</div>
 	<!-- ko foreach: typeList -->
@@ -18,12 +56,14 @@
 					</div>
 					<p class="mt5" data-bind="text: description"></p>
 				</div>
+				<!-- ko if: $parents[1].data.currentUser && $parents[1].data.currentUser.level<2 -->
 				<div class="extra content">
 					<div class="ui labels textr">
 						<a class="ui label teal" data-bind="attr: {href: '#/edit/'+id}">编辑</a>
 						<a class="ui label grey" href="javascript:void(0);" data-bind="click: $parents[1].remove">删除</a>
 					</div>
 			    </div>
+			    <!-- /ko -->
 			</div>
 			<!-- /ko -->
 		</div>

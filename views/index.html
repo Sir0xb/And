@@ -60,6 +60,8 @@
                 params.mapping.getTemp = function (key) {return key}
             }
 
+            params.currentUser = JSON.parse('<%- JSON.stringify(currentUser)%>');
+
             var self = Super.call({}, { parent: {}, data: params });
 
             self.palette({

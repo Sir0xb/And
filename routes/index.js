@@ -9,6 +9,7 @@ var Users = require("./Users");
 var ResourceDepot = require("./ResourceDepot");
 var Upload = require("./Upload");
 var NpmPublish = require("./NpmPublish");
+var userDao = require("../models/userDao");
 
 module.exports = function (app) {
     Customs(app);
