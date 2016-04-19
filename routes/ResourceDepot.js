@@ -1,4 +1,5 @@
 var Tools = require("./resTools");
+var Users = require("../models/userDao");
 
 module.exports = function(app) {
 	var ResourceDao = require("../models/resourceDao");
@@ -36,7 +37,6 @@ module.exports = function(app) {
                 }
             });
         }
-
         
     });
 
