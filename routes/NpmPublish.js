@@ -58,9 +58,9 @@ module.exports = function(app) {
                 	exec('npm publish '+targetPath, function (error, stdout, stderr) {
 						if (error !== null) {
 							console.log('exec error: ' + error);
-							res.json({succ: false, message: error});
+							res.json({success: false, message: error});
 						}
-						res.json({success: true, message: {name: filePath, url: ''} });
+						res.json({success: true, message: {name: filePath} });
 					});
                     
                 }

@@ -26,6 +26,11 @@
 	font-size: 40px;
 	color: #0B5657;
 }
+.ui.label.betatag{
+	position: absolute;
+    font-family: Arial;
+    line-height: 6px;
+}
 </style>
 <div class="ui grid">
 	<!-- ko if: data.currentUser && data.currentUser.level<2 -->
@@ -37,7 +42,7 @@
 	</div>
 	<!-- /ko -->
 	<div class="topbanner">
-		<h1 class="textc">前端资源仓库</h1>
+		<h1 class="textc">前端资源仓库<span class="ui label orange betatag">beta</span></h1>
 		<div class="ui list" style="font-size: 16px;">
 			<div class="item">1. npm set registry http://192.168.100.49:4873</div>
 			<div class="item">2. npm install jquery 1.9.1</div>
