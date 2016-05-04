@@ -7,12 +7,41 @@ var formidable = require('formidable');
 var fs = require('fs');
 var path = require('path');
 var unzip = require('unzip');
+var exec = require('child_process').exec;
+
+function execSequence(commands, callback, breakOnError) {
+    var onSuccessOnly  = onSuccessOnly || false,
+        BreakException = {};
+
+    try {
+        commands.forEach(function (command) {
+            exec(command, function (error, stdout, stderr) {
+                if (error) {
+                    if (breakOnError) {
+                        throw BreakException;
+                    } else {
+                        callback(error, stderr, command);
+                    }
+                } else {
+                    callback(null, stdout, command);
+                }
+            });
+        });
+    } catch (ex) {
+        if (breakOnError) {
+            return;
+        }
+    }
+}
 
 module.exports = function(app) {
 
     app.post("/upload/cdn-repo", function (req, res, next) {
     	var form = new formidable.IncomingForm();
 	    form.uploadDir = path.resolve(__dirname, '..', 'public/tmp'); //文件保存的临时目录为当前项目下的tmp文件夹
+	    if (!fs.existsSync(form.uploadDir)) {
+            fs.mkdir(form.uploadDir);
+        }
 	    form.maxFieldsSize = 100 * 1024 * 1024;  //用户头像大小限制为最大100M
 	    form.keepExtensions = true;        //使用文件的原扩展名
 	    form.parse(req, function (err, fields, file) {
@@ -46,22 +75,33 @@ module.exports = function(app) {
                     //解压文件
                     var folderName = originFileName.substring(0, originFileName.length-4);
                     var targetPath = path.join(targetDir, folderName);
-                    fs.createReadStream(targetFile).pipe(unzip.Extract({ path: targetPath }));
+                    fs.createReadStream(targetFile).pipe(unzip.Extract({ path: targetDir }));
                     
                     //删除压缩包
                     fs.unlink(targetFile);
 
                     //发布到npm
-                    console.log(targetPath)
-                    var exec = require('child_process').exec;
-
-                	exec('npm publish '+targetPath, function (error, stdout, stderr) {
-						if (error !== null) {
-							console.log('exec error: ' + error);
-							res.json({succ: false, message: error});
-						}
-						res.json({success: true, message: {name: filePath, url: ''} });
-					});
+                    var publicPath = '';
+                    fs.readdir(targetPath, function(err, files){
+                    	if(err){
+                    		res.json({success: false, message: err});
+                    	}
+                    	else{                    		
+                    		var cmdArray = [];
+                    		files.forEach(function(item){
+                    			var cmd = 'npm publish '+path.join(targetPath, item);
+                    			cmdArray.push(cmd);
+                    		});
+                    		execSequence(cmdArray, function(err){
+                    			if(err){
+                    				res.json({success: false, message: err});
+                    			}
+                    			else{
+                    				res.json({success: true });
+                    			}
+                    		});
+                    	}
+                    })
                     
                 }
             });
