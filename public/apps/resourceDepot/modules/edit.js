@@ -4,12 +4,47 @@ define(['knockout', "Super", 'Tools', 'uploader', 'marked', 'hljs', 'uploader_sk
 
         self.types = dataMap.types;
 
+        var cdnPrefix = 'http://cdn-static-shared.test.17zuoye.net/s17/';
+
         self.addFile = function(){
-        	this.files.push({name: ko.observable(''), devUrl: ko.observable(''), cdn: ko.observable('')});
+            var _this = this;
+            var newFile = {
+                name: ko.observable('')
+            }
+
+            newFile.devUrl = ko.computed(function(){
+                return 'lib/' + self.formData.title() + '/' + _this.version() + '/' + 'dist/' + newFile.name();
+            });
+
+            newFile.cdn = ko.computed(function(){
+                return cdnPrefix + newFile.devUrl();
+            });
+        	this.files.push(newFile);
         };
 
         self.addVersion = function(){
-        	self.formData.versionPackage.push({version: ko.observable(''), files: ko.observableArray([{name: ko.observable(''), devUrl: ko.observable(''), cdn: ko.observable('')}])});
+            
+            var newVersion = {
+                version: ko.observable(''), 
+                files: ko.observableArray([])
+            }
+            /*var newFile = {
+                name: ko.observable('')
+            }
+
+            newFile.devUrl = ko.computed(function(){
+                return 'lib/' + self.formData.title() + '/' + newVersion.version() + '/' + 'dist/' + newFile.name();
+            });
+
+            newFile.cdn = ko.computed(function(){
+                return cdnPrefix + newFile.devUrl();
+            });
+
+            newVersion.files.push(newFile);*/
+
+            self.addFile.call(newVersion);
+
+        	self.formData.versionPackage.push(newVersion);
         };
 
         self.removeVersion = function(){

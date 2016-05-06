@@ -1,0 +1,11 @@
+{
+  "name": "fullPage",
+  "version": "2.7.9",
+  "description": "",
+  "main": "src/jquery.fullPage.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
