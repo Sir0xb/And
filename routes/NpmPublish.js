@@ -61,7 +61,7 @@ module.exports = function(app) {
 	            }
 	        }
 	        //文件移动的目录文件夹，不存在时创建目标文件夹
-	        var targetDir = path.resolve(__dirname, '..', 'public/cdn-repo');
+	        var targetDir = path.resolve(__dirname, '..', 'public/cdn-repo/lib');
 	        if (!fs.existsSync(targetDir)) {
 	            fs.mkdir(targetDir);
 	        }
@@ -82,6 +82,7 @@ module.exports = function(app) {
 
                     //发布到npm
                     var publicPath = '';
+                    console.log(targetPath)
                     fs.readdir(targetPath, function(err, files){
                     	if(err){
                     		res.json({success: false, message: err});
@@ -90,6 +91,7 @@ module.exports = function(app) {
                     		var cmdArray = [];
                     		files.forEach(function(item){
                     			var cmd = 'npm publish '+path.join(targetPath, item);
+                    			console.log(cmd)
                     			cmdArray.push(cmd);
                     		});
                     		execSequence(cmdArray, function(err){
